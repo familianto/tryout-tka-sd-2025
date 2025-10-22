@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ringkasan & Rumus Matematika Kelas VI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { 
+      margin: 0; 
+      padding: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: white;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .section-content {
+      display: none;
+    }
+    .section-content.active {
+      display: block;
+    }
+    .formula-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50">
+  
+  <div class="max-w-6xl mx-auto p-4 py-8">
+    
+    <!-- Breadcrumb -->
+    <div class="mb-6 flex gap-2 text-sm">
+      <a href="../index.html" class="text-blue-600 hover:text-blue-800 font-medium">Beranda</a>
+      <span class="text-gray-400">→</span>
+      <a href="index.html" class="text-blue-600 hover:text-blue-800 font-medium">Matematika</a>
+      <span class="text-gray-400">→</span>
+      <span class="text-gray-600 font-medium">Ringkasan & Rumus</span>
+    </div>
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl shadow-2xl p-8 mb-8 text-white">
+      <div class="text-center">
+        <div class="inline-block bg-white/20 backdrop-blur-sm px-6 py-2 rounded-full text-sm font-semibold mb-4">
+          📚 MATERI LENGKAP
+        </div>
+        <h1 class="text-5xl font-bold mb-3">Ringkasan & Rumus</h1>
+        <p class="text-xl text-white/90">Matematika Kelas VI SD</p>
+        <p class="text-white/80 mt-2">Semua yang Perlu Kamu Ketahui untuk Persiapan TKA</p>
+      </div>
+    </div>
+
+    <!-- Table of Contents (Sticky Navigation) -->
+    <div class="sticky-nav rounded-2xl shadow-xl mb-8">
+      <div class="p-6">
+        <h2 class="font-bold text-gray-800 mb-4 text-lg flex items-center gap-2">
+          <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          Daftar Isi
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+          <button onclick="showSection('operasi')" class="section-btn text-left px-4 py-2 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium transition-all">
+            1. Operasi Bilangan
+          </button>
+          <button onclick="showSection('perbandingan')" class="section-btn text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium transition-all">
+            2. Perbandingan
+          </button>
+          <button onclick="showSection('aritmetika')" class="section-btn text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium transition-all">
+            3. Aritmetika Sosial
+          </button>
+          <button onclick="showSection('pengukuran')" class="section-btn text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium transition-all">
+            4. Pengukuran
+          </button>
+          <button onclick="showSection('bidang')" class="section-btn text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium transition-all">
+            5. Geometri Bidang
+          </button>
+          <button onclick="showSection('ruang')" class="section-btn text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium transition-all">
+            6. Geometri Ruang
+          </button>
+          <button onclick="showSection('statistika')" class="section-btn text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium transition-all">
+            7. Statistika
+          </button>
+          <button onclick="showSection('peluang')" class="section-btn text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium transition-all">
+            8. Peluang
+          </button>
+          <button onclick="showSection('fpb')" class="section-btn text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium transition-all">
+            9. FPB & KPK
+          </button>
+          <button onclick="showSection('pola')" class="section-btn text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium transition-all">
+            10. Pola Bilangan
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Sections -->
+    
+    <!-- Section 1: Operasi Bilangan -->
+    <div id="section-operasi" class="section-content active">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">1</span>
+          Operasi Bilangan Bulat & Pecahan
+        </h2>
+        
+        <div class="space-y-6">
+          <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+            <h3 class="font-bold text-blue-900 mb-2">Urutan Operasi Hitung Campuran:</h3>
+            <ol class="list-decimal list-inside space-y-1 text-blue-800">
+              <li>Operasi dalam kurung ( )</li>
+              <li>Perkalian (×) dan Pembagian (÷) dari kiri ke kanan</li>
+              <li>Penjumlahan (+) dan Pengurangan (−) dari kiri ke kanan</li>
+            </ol>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Operasi Pecahan:</h3>
+            
+            <div class="formula-box">
+              Penjumlahan: a/b + c/d = (ad + bc) / bd
+            </div>
+            
+            <div class="formula-box">
+              Perkalian: a/b × c/d = (a × c) / (b × d)
+            </div>
+            
+            <div class="formula-box">
+              Pembagian: a/b ÷ c/d = a/b × d/c
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Tabel Konversi:</h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full border-collapse border border-gray-300">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border border-gray-300 px-4 py-2">Pecahan</th>
+                    <th class="border border-gray-300 px-4 py-2">Desimal</th>
+                    <th class="border border-gray-300 px-4 py-2">Persen</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  <tr><td class="border px-4 py-2">1/2</td><td class="border px-4 py-2">0,5</td><td class="border px-4 py-2">50%</td></tr>
+                  <tr class="bg-gray-50"><td class="border px-4 py-2">1/4</td><td class="border px-4 py-2">0,25</td><td class="border px-4 py-2">25%</td></tr>
+                  <tr><td class="border px-4 py-2">3/4</td><td class="border px-4 py-2">0,75</td><td class="border px-4 py-2">75%</td></tr>
+                  <tr class="bg-gray-50"><td class="border px-4 py-2">1/5</td><td class="border px-4 py-2">0,2</td><td class="border px-4 py-2">20%</td></tr>
+                  <tr><td class="border px-4 py-2">1/8</td><td class="border px-4 py-2">0,125</td><td class="border px-4 py-2">12,5%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Perbandingan -->
+    <div id="section-perbandingan" class="section-content">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-green-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">2</span>
+          Perbandingan & Skala
+        </h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Perbandingan dengan Total:</h3>
+            <p class="text-gray-700 mb-2">Jika A : B = m : n dan total = T, maka:</p>
+            <div class="formula-box">
+              Bagian A = m/(m+n) × T
+            </div>
+            <div class="formula-box">
+              Bagian B = n/(m+n) × T
+            </div>
+          </div>
+
+          <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+            <h3 class="font-bold text-green-900 mb-2">Contoh Soal:</h3>
+            <p class="text-green-800 mb-2">Perbandingan 3:5, total 80</p>
+            <p class="text-green-800">• Bagian pertama = 3/8 × 80 = 30</p>
+            <p class="text-green-800">• Bagian kedua = 5/8 × 80 = 50</p>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Skala Peta:</h3>
+            <div class="formula-box">
+              Skala = Jarak peta / Jarak sebenarnya
+            </div>
+            <div class="formula-box">
+              Jarak sebenarnya = Jarak peta × Skala
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Aritmetika Sosial -->
+    <div id="section-aritmetika" class="section-content">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-yellow-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">3</span>
+          Aritmetika Sosial
+        </h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Untung dan Rugi:</h3>
+            <div class="formula-box">
+              % Untung = (Untung / Modal) × 100%
+            </div>
+            <div class="formula-box">
+              % Rugi = (Rugi / Modal) × 100%
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Diskon:</h3>
+            <div class="formula-box">
+              Harga bayar = Harga awal × (100% - % diskon)
+            </div>
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+              <p class="font-bold text-yellow-900 mb-1">Diskon Bertingkat:</p>
+              <p class="text-yellow-800 text-sm">Jika ada diskon 30% lalu 15%:</p>
+              <p class="text-yellow-800 text-sm">Harga = Awal × 0,7 × 0,85</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Bunga Bank:</h3>
+            <div class="formula-box">
+              Bunga = (Modal × % Bunga × Waktu) / 100
+            </div>
+            <div class="formula-box">
+              Total = Pinjaman + Bunga
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Pengukuran -->
+    <div id="section-pengukuran" class="section-content">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-purple-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">4</span>
+          Pengukuran
+        </h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Kecepatan, Jarak, Waktu:</h3>
+            <div class="formula-box">
+              Jarak = Kecepatan × Waktu
+            </div>
+            <div class="formula-box">
+              Kecepatan = Jarak / Waktu
+            </div>
+            <div class="formula-box">
+              Waktu = Jarak / Kecepatan
+            </div>
+            <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mt-4">
+              <p class="font-bold text-purple-900 mb-1">Konversi Kecepatan:</p>
+              <p class="text-purple-800 text-sm">• km/jam → m/detik: Bagi 3,6</p>
+              <p class="text-purple-800 text-sm">• m/detik → km/jam: Kalikan 3,6</p>
+              <p class="text-purple-800 text-sm">• Contoh: 72 km/jam = 20 m/detik</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Debit:</h3>
+            <div class="formula-box">
+              Debit = Volume / Waktu
+            </div>
+            <div class="formula-box">
+              Volume = Debit × Waktu
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Konversi Penting:</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <h4 class="font-semibold text-gray-800 mb-2">Volume:</h4>
+                <p class="text-sm text-gray-700">1 m³ = 1.000 liter</p>
+                <p class="text-sm text-gray-700">1 dm³ = 1 liter</p>
+                <p class="text-sm text-gray-700">1 cm³ = 1 ml</p>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <h4 class="font-semibold text-gray-800 mb-2">Berat:</h4>
+                <p class="text-sm text-gray-700">1 ton = 1.000 kg</p>
+                <p class="text-sm text-gray-700">1 kuintal = 100 kg</p>
+                <p class="text-sm text-gray-700">1 kg = 10 hg</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Geometri Bidang -->
+    <div id="section-bidang" class="section-content">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-pink-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">5</span>
+          Geometri Bidang Datar
+        </h2>
+        
+        <div class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            
+            <!-- Persegi -->
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border-2 border-blue-200">
+              <h4 class="font-bold text-blue-900 mb-3 text-lg">Persegi</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-blue-800"><strong>Keliling:</strong> K = 4 × s</p>
+                <p class="text-blue-800"><strong>Luas:</strong> L = s²</p>
+                <p class="text-blue-800"><strong>Diagonal:</strong> d = s√2</p>
+              </div>
+            </div>
+
+            <!-- Persegi Panjang -->
+            <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-xl border-2 border-green-200">
+              <h4 class="font-bold text-green-900 mb-3 text-lg">Persegi Panjang</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-green-800"><strong>Keliling:</strong> K = 2(p + l)</p>
+                <p class="text-green-800"><strong>Luas:</strong> L = p × l</p>
+                <p class="text-green-800"><strong>Diagonal:</strong> d = √(p² + l²)</p>
+              </div>
+            </div>
+
+            <!-- Segitiga -->
+            <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-xl border-2 border-yellow-200">
+              <h4 class="font-bold text-yellow-900 mb-3 text-lg">Segitiga</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-yellow-800"><strong>Keliling:</strong> K = a + b + c</p>
+                <p class="text-yellow-800"><strong>Luas:</strong> L = ½ × a × t</p>
+                <p class="text-yellow-800"><strong>Pythagoras:</strong> c² = a² + b²</p>
+              </div>
+            </div>
+
+            <!-- Lingkaran -->
+            <div class="bg-gradient-to-br from-red-50 to-red-100 p-5 rounded-xl border-2 border-red-200">
+              <h4 class="font-bold text-red-900 mb-3 text-lg">Lingkaran</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-red-800"><strong>Keliling:</strong> K = 2πr = πd</p>
+                <p class="text-red-800"><strong>Luas:</strong> L = πr²</p>
+                <p class="text-red-800"><strong>π:</strong> 22/7 atau 3,14</p>
+              </div>
+            </div>
+
+            <!-- Trapesium -->
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border-2 border-purple-200">
+              <h4 class="font-bold text-purple-900 mb-3 text-lg">Trapesium</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-purple-800"><strong>Luas:</strong> L = ½ × (a + b) × t</p>
+                <p class="text-purple-800 text-xs">a = sisi sejajar atas</p>
+                <p class="text-purple-800 text-xs">b = sisi sejajar bawah</p>
+              </div>
+            </div>
+
+            <!-- Jajar Genjang -->
+            <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-5 rounded-xl border-2 border-indigo-200">
+              <h4 class="font-bold text-indigo-900 mb-3 text-lg">Jajar Genjang</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-indigo-800"><strong>Keliling:</strong> K = 2(a + b)</p>
+                <p class="text-indigo-800"><strong>Luas:</strong> L = a × t</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 6: Geometri Ruang -->
+    <div id="section-ruang" class="section-content">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-indigo-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">6</span>
+          Geometri Bangun Ruang
+        </h2>
+        
+        <div class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            
+            <!-- Kubus -->
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border-2 border-blue-300 shadow-lg">
+              <h4 class="font-bold text-blue-900 mb-3 text-lg">🔲 Kubus</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-blue-800"><strong>Volume:</strong> V = s³</p>
+                <p class="text-blue-800"><strong>Luas Permukaan:</strong> L = 6s²</p>
+                <p class="text-blue-800"><strong>Diagonal Ruang:</strong> d = s√3</p>
+              </div>
+            </div>
+
+            <!-- Balok -->
+            <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-xl border-2 border-green-300 shadow-lg">
+              <h4 class="font-bold text-green-900 mb-3 text-lg">📦 Balok</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-green-800"><strong>Volume:</strong> V = p × l × t</p>
+                <p class="text-green-800"><strong>Luas Permukaan:</strong> L = 2(pl + pt + lt)</p>
+                <p class="text-green-800"><strong>Diagonal Ruang:</strong> d = √(p²+l²+t²)</p>
+              </div>
+            </div>
+
+            <!-- Prisma Segitiga -->
+            <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-xl border-2 border-yellow-300 shadow-lg">
+              <h4 class="font-bold text-yellow-900 mb-3 text-lg">🔺 Prisma Segitiga</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-yellow-800"><strong>Volume:</strong> V = L_alas × t_prisma</p>
+                <p class="text-yellow-800"><strong>Luas Permukaan:</strong> L = 2×L_alas + K_alas×t</p>
+              </div>
+            </div>
+
+            <!-- Limas Segiempat -->
+            <div class="bg-gradient-to-br from-red-50 to-red-100 p-5 rounded-xl border-2 border-red-300 shadow-lg">
+              <h4 class="font-bold text-red-900 mb-3 text-lg">🔻 Limas Segiempat</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-red-800"><strong>Volume:</strong> V = ⅓ × L_alas × t</p>
+                <p class="text-red-800"><strong>Luas Permukaan:</strong> L = L_alas + L_selimut</p>
+              </div>
+            </div>
+
+            <!-- Tabung -->
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border-2 border-purple-300 shadow-lg">
+              <h4 class="font-bold text-purple-900 mb-3 text-lg">🥫 Tabung</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-purple-800"><strong>Volume:</strong> V = πr²t</p>
+                <p class="text-purple-800"><strong>Luas Permukaan:</strong> L = 2πr(r + t)</p>
+                <p class="text-purple-800"><strong>Luas Selimut:</strong> L_s = 2πrt</p>
+              </div>
+            </div>
+
+            <!-- Kerucut -->
+            <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-5 rounded-xl border-2 border-pink-300 shadow-lg">
+              <h4 class="font-bold text-pink-900 mb-3 text-lg">🍦 Kerucut</h4>
+              <div class="space-y-2 text-sm">
+                <p class="text-pink-800"><strong>Volume:</strong> V = ⅓πr²t</p>
+                <p class="text-pink-800"><strong>Luas Permukaan:</strong> L = πr(r + s)</p>
+                <p class="text-pink-800 text-xs">s = garis pelukis</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 7: Statistika -->
+    <div id="section-statistika" class="section-content">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">7</span>
+          Statistika & Penyajian Data
+        </h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Mean (Rata-rata):</h3>
+            <div class="formula-box">
+              Mean = Jumlah semua data / Banyak data
+            </div>
+            <div class="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg mt-2">
+              <p class="text-orange-800 text-sm"><strong>Contoh:</strong> Data: 70, 80, 75, 85, 90</p>
+              <p class="text-orange-800 text-sm">Mean = (70+80+75+85+90) ÷ 5 = 80</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Median (Nilai Tengah):</h3>
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <p class="text-gray-700 mb-2"><strong>Data Ganjil:</strong> Median = data tengah (setelah diurutkan)</p>
+              <p class="text-gray-700"><strong>Data Genap:</strong> Median = rata-rata dua data tengah</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Modus:</h3>
+            <p class="text-gray-700">Modus = data yang paling sering muncul</p>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Jangkauan (Range):</h3>
+            <div class="formula-box">
+              Jangkauan = Data terbesar - Data terkecil
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 8: Peluang -->
+    <div id="section-peluang" class="section-content">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-teal-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">8</span>
+          Peluang
+        </h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Rumus Peluang:</h3>
+            <div class="formula-box">
+              P(A) = Banyak kejadian A / Banyak semua kemungkinan
+            </div>
+          </div>
+
+          <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-r-lg">
+            <h3 class="font-bold text-teal-900 mb-2">Nilai Peluang:</h3>
+            <p class="text-teal-800 text-sm">• 0 ≤ P(A) ≤ 1</p>
+            <p class="text-teal-800 text-sm">• P = 0 → Mustahil terjadi</p>
+            <p class="text-teal-800 text-sm">• P = 1 → Pasti terjadi</p>
+          </div>
+
+          <div class="bg-gray-50 p-5 rounded-lg border border-gray-200">
+            <h3 class="font-bold text-gray-800 mb-2">Contoh:</h3>
+            <p class="text-gray-700 text-sm mb-2">Kotak: 3 merah, 2 biru, 5 kuning (total 10)</p>
+            <p class="text-gray-700 text-sm">• Peluang merah = 3/10</p>
+            <p class="text-gray-700 text-sm">• Peluang biru = 2/10 = 1/5</p>
+            <p class="text-gray-700 text-sm">• Peluang kuning = 5/10 = 1/2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 9: FPB & KPK -->
+    <div id="section-fpb" class="section-content">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">9</span>
+          FPB & KPK
+        </h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">FPB (Faktor Persekutuan Terbesar):</h3>
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+              <p class="font-bold text-red-900 mb-2">Cara Faktorisasi Prima:</p>
+              <ol class="list-decimal list-inside space-y-1 text-red-800 text-sm">
+                <li>Buat pohon faktor</li>
+                <li>Ambil faktor yang sama dengan pangkat terkecil</li>
+                <li>Kalikan</li>
+              </ol>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mt-3">
+              <p class="text-gray-700 text-sm font-bold mb-2">Contoh: FPB dari 24 dan 36</p>
+              <p class="text-gray-700 text-sm">• 24 = 2³ × 3</p>
+              <p class="text-gray-700 text-sm">• 36 = 2² × 3²</p>
+              <p class="text-gray-700 text-sm">• FPB = 2² × 3 = 12</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">KPK (Kelipatan Persekutuan Terkecil):</h3>
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+              <p class="font-bold text-blue-900 mb-2">Cara Faktorisasi Prima:</p>
+              <ol class="list-decimal list-inside space-y-1 text-blue-800 text-sm">
+                <li>Buat pohon faktor</li>
+                <li>Ambil semua faktor dengan pangkat terbesar</li>
+                <li>Kalikan</li>
+              </ol>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mt-3">
+              <p class="text-gray-700 text-sm font-bold mb-2">Contoh: KPK dari 24 dan 36</p>
+              <p class="text-gray-700 text-sm">• 24 = 2³ × 3</p>
+              <p class="text-gray-700 text-sm">• 36 = 2² × 3²</p>
+              <p class="text-gray-700 text-sm">• KPK = 2³ × 3² = 72</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3">Hubungan FPB dan KPK:</h3>
+            <div class="formula-box">
+              a × b = FPB(a,b) × KPK(a,b)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 10: Pola Bilangan -->
+    <div id="section-pola" class="section-content">
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <span class="bg-cyan-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">10</span>
+          Pola Bilangan
+        </h2>
+        
+        <div class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-4">
+            
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border-2 border-blue-200">
+              <h4 class="font-bold text-blue-900 mb-2">Pola Bilangan Ganjil</h4>
+              <p class="text-blue-800 text-sm mb-1">1, 3, 5, 7, 9, ... (+2)</p>
+              <p class="text-blue-800 text-sm font-semibold">Suku ke-n = 2n - 1</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg border-2 border-green-200">
+              <h4 class="font-bold text-green-900 mb-2">Pola Bilangan Genap</h4>
+              <p class="text-green-800 text-sm mb-1">2, 4, 6, 8, 10, ... (+2)</p>
+              <p class="text-green-800 text-sm font-semibold">Suku ke-n = 2n</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 rounded-lg border-2 border-yellow-200">
+              <h4 class="font-bold text-yellow-900 mb-2">Pola Bilangan Kuadrat</h4>
+              <p class="text-yellow-800 text-sm mb-1">1, 4, 9, 16, 25, ... (1², 2², 3²)</p>
+              <p class="text-yellow-800 text-sm font-semibold">Suku ke-n = n²</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-red-50 to-red-100 p-4 rounded-lg border-2 border-red-200">
+              <h4 class="font-bold text-red-900 mb-2">Pola Bilangan Segitiga</h4>
+              <p class="text-red-800 text-sm mb-1">1, 3, 6, 10, 15, ...</p>
+              <p class="text-red-800 text-sm font-semibold">Suku ke-n = n(n+1)/2</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg border-2 border-purple-200">
+              <h4 class="font-bold text-purple-900 mb-2">Pola Fibonacci</h4>
+              <p class="text-purple-800 text-sm mb-1">1, 1, 2, 3, 5, 8, 13, ...</p>
+              <p class="text-purple-800 text-sm">(Jumlah 2 suku sebelumnya)</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-4 rounded-lg border-2 border-pink-200">
+              <h4 class="font-bold text-pink-900 mb-2">Pola Geometri</h4>
+              <p class="text-pink-800 text-sm mb-1">2, 4, 8, 16, 32, ... (×2)</p>
+              <p class="text-pink-800 text-sm">3, 9, 27, 81, ... (×3)</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl shadow-2xl p-8 text-white">
+      <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+        💡 Tips Mengerjakan Soal
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-bold mb-3 text-xl">Sebelum Mengerjakan:</h3>
+          <ul class="space-y-2 text-sm text-white/90">
+            <li>✓ Baca soal dengan teliti</li>
+            <li>✓ Tandai informasi penting</li>
+            <li>✓ Perhatikan satuan</li>
+            <li>✓ Identifikasi tipe soal</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold mb-3 text-xl">Saat Mengerjakan:</h3>
+          <ul class="space-y-2 text-sm text-white/90">
+            <li>✓ Tulis langkah-langkah</li>
+            <li>✓ Buat sketsa jika perlu</li>
+            <li>✓ Kerjakan yang mudah dulu</li>
+            <li>✓ Cek logika jawaban</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-6 bg-white/20 backdrop-blur-sm rounded-lg p-4">
+        <p class="text-center font-semibold text-lg">
+          🌟 Kunci Sukses: Latihan, Pemahaman Konsep, dan Manajemen Waktu! 🌟
+        </p>
+      </div>
+    </div>
+
+    <!-- Back to Matematika -->
+    <div class="mt-8 text-center">
+      <a href="index.html" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+        ← Kembali ke Halaman Matematika
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-8 text-sm text-gray-600">
+      <p>📚 Ringkasan & Rumus Matematika Kelas VI SD</p>
+      <p class="text-xs mt-1">Tahun Pelajaran 2025-2026</p>
+    </div>
+
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section-content').forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      // Remove active state from all buttons
+      document.querySelectorAll('.section-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-100', 'bg-blue-200');
+        btn.classList.add('bg-gray-100');
+      });
+      
+      // Show selected section
+      document.getElementById('section-' + sectionId).classList.add('active');
+      
+      // Activate button
+      event.target.classList.remove('bg-gray-100');
+      event.target.classList.add('bg-blue-100');
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
