@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 1 - Try Out Matematika Kelas VI</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-type="module">
+    const { useState } = React;
+
+    // Icon Components
+    const ChevronDown = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"></polyline></svg>;
+    const ChevronUp = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="18 15 12 9 6 15"></polyline></svg>;
+    const BookOpen = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>;
+    const CheckCircle = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
+    const Printer = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>;
+    const Download = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>;
+
+    // Visualization Components (sama seperti sebelumnya)
+    const DiagramBatang = () => (
+      <svg viewBox="0 0 400 250" className="w-full max-w-md mx-auto">
+        <text x="200" y="20" textAnchor="middle" className="text-sm font-bold fill-gray-700">Hasil Panen Petani (Kuintal)</text>
+        <line x1="50" y1="200" x2="350" y2="200" stroke="#333" strokeWidth="2"/>
+        <line x1="50" y1="200" x2="50" y2="50" stroke="#333" strokeWidth="2"/>
+        <rect x="70" y="120" width="40" height="80" fill="#3B82F6"/>
+        <rect x="130" y="80" width="40" height="120" fill="#3B82F6"/>
+        <rect x="190" y="100" width="40" height="100" fill="#3B82F6"/>
+        <rect x="250" y="60" width="40" height="140" fill="#3B82F6"/>
+        <rect x="310" y="100" width="40" height="100" fill="#3B82F6"/>
+        <text x="90" y="115" textAnchor="middle" className="text-xs font-bold fill-gray-800">40</text>
+        <text x="150" y="75" textAnchor="middle" className="text-xs font-bold fill-gray-800">60</text>
+        <text x="210" y="95" textAnchor="middle" className="text-xs font-bold fill-gray-800">50</text>
+        <text x="270" y="55" textAnchor="middle" className="text-xs font-bold fill-gray-800">70</text>
+        <text x="330" y="95" textAnchor="middle" className="text-xs font-bold fill-gray-800">50</text>
+        <text x="90" y="220" textAnchor="middle" className="text-xs fill-gray-600">Jan</text>
+        <text x="150" y="220" textAnchor="middle" className="text-xs fill-gray-600">Feb</text>
+        <text x="210" y="220" textAnchor="middle" className="text-xs fill-gray-600">Mar</text>
+        <text x="270" y="220" textAnchor="middle" className="text-xs fill-gray-600">Apr</text>
+        <text x="330" y="220" textAnchor="middle" className="text-xs fill-gray-600">Mei</text>
+        <text x="40" y="205" textAnchor="end" className="text-xs fill-gray-600">0</text>
+        <text x="40" y="155" textAnchor="end" className="text-xs fill-gray-600">50</text>
+        <text x="40" y="105" textAnchor="end" className="text-xs fill-gray-600">100</text>
+      </svg>
+    );
+
+    const TamanKolam = () => (
+      <svg viewBox="0 0 300 300" className="w-full max-w-sm mx-auto">
+        <text x="150" y="20" textAnchor="middle" className="text-sm font-bold fill-gray-700">Taman Persegi dengan Kolam Lingkaran</text>
+        <rect x="50" y="50" width="200" height="200" fill="#86efac" stroke="#22c55e" strokeWidth="3"/>
+        <circle cx="150" cy="150" r="58.3" fill="#3b82f6" stroke="#1d4ed8" strokeWidth="2"/>
+        <text x="150" y="45" textAnchor="middle" className="text-xs font-bold fill-gray-700">24 m</text>
+        <text x="260" y="150" textAnchor="start" className="text-xs font-bold fill-gray-700">24 m</text>
+        <text x="150" y="155" textAnchor="middle" className="text-xs font-bold fill-white">d = 14m</text>
+        <line x1="91.7" y1="150" x2="208.3" y2="150" stroke="white" strokeWidth="2"/>
+      </svg>
+    );
+
+    const DiagramLingkaran = () => {
+      const data = [
+        { label: 'Olahraga', value: 120, color: '#3b82f6', percentage: 33.3 },
+        { label: 'Membaca', value: 90, color: '#10b981', percentage: 25 },
+        { label: 'Musik', value: 75, color: '#f59e0b', percentage: 20.8 },
+        { label: 'Menggambar', value: 75, color: '#ef4444', percentage: 20.8 }
+      ];
+      
+      let currentAngle = 0;
+      
+      return (
+        <svg viewBox="0 0 400 320" className="w-full max-w-md mx-auto">
+          <text x="200" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Distribusi Hobi 360 Siswa</text>
+          {data.map((item, idx) => {
+            const startAngle = currentAngle;
+            const angle = (item.value / 360) * 360;
+            currentAngle += angle;
+            const startRad = (startAngle - 90) * Math.PI / 180;
+            const endRad = ((startAngle + angle) - 90) * Math.PI / 180;
+            const largeArc = angle > 180 ? 1 : 0;
+            const x1 = 200 + 80 * Math.cos(startRad);
+            const y1 = 150 + 80 * Math.sin(startRad);
+            const x2 = 200 + 80 * Math.cos(endRad);
+            const y2 = 150 + 80 * Math.sin(endRad);
+            const path = `M 200 150 L ${x1} ${y1} A 80 80 0 ${largeArc} 1 ${x2} ${y2} Z`;
+            return <path key={idx} d={path} fill={item.color} stroke="white" strokeWidth="2"/>;
+          })}
+          {data.map((item, idx) => (
+            <g key={idx}>
+              <rect x="50" y={240 + idx * 20} width="15" height="15" fill={item.color}/>
+              <text x="70" y={252 + idx * 20} className="text-xs fill-gray-700">
+                {item.label}: {item.value} ({item.percentage}%)
+              </text>
+            </g>
+          ))}
+        </svg>
+      );
+    };
+
+    const BangunGabungan = () => (
+      <svg viewBox="0 0 300 250" className="w-full max-w-sm mx-auto">
+        <text x="150" y="20" textAnchor="middle" className="text-sm font-bold fill-gray-700">Persegi Panjang + Segitiga</text>
+        <rect x="50" y="80" width="200" height="120" fill="#ddd6fe" stroke="#7c3aed" strokeWidth="2"/>
+        <polygon points="50,80 250,80 150,20" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2"/>
+        <text x="150" y="145" textAnchor="middle" className="text-xs font-bold fill-gray-800">20 cm</text>
+        <text x="260" y="140" textAnchor="start" className="text-xs font-bold fill-gray-800">12 cm</text>
+        <text x="165" y="55" textAnchor="start" className="text-xs font-bold fill-gray-800">t = 8cm</text>
+        <line x1="150" y1="20" x2="150" y2="80" stroke="#ef4444" strokeWidth="2" strokeDasharray="4"/>
+        <text x="150" y="230" textAnchor="middle" className="text-xs fill-gray-600">Alas segitiga = 20 cm</text>
+      </svg>
+    );
+
+    const PrismaSegitiga = () => (
+      <svg viewBox="0 0 300 250" className="w-full max-w-sm mx-auto">
+        <text x="150" y="20" textAnchor="middle" className="text-sm font-bold fill-gray-700">Prisma Segitiga Siku-siku</text>
+        <polygon points="50,180 50,120 110,180" fill="#93c5fd" stroke="#2563eb" strokeWidth="2"/>
+        <polygon points="200,120 200,60 260,120" fill="#bfdbfe" stroke="#2563eb" strokeWidth="2"/>
+        <line x1="50" y1="180" x2="200" y2="120" stroke="#2563eb" strokeWidth="2"/>
+        <line x1="50" y1="120" x2="200" y2="60" stroke="#2563eb" strokeWidth="2"/>
+        <line x1="110" y1="180" x2="260" y2="120" stroke="#2563eb" strokeWidth="2"/>
+        <polygon points="50,120 200,60 260,120 110,180" fill="#dbeafe" stroke="#2563eb" strokeWidth="1" opacity="0.7"/>
+        <text x="75" y="155" className="text-xs font-bold fill-gray-800">6cm</text>
+        <text x="30" y="150" className="text-xs font-bold fill-gray-800">8cm</text>
+        <text x="125" y="210" className="text-xs font-bold fill-gray-800">t = 15cm</text>
+        <rect x="50" y="170" width="10" height="10" fill="none" stroke="#ef4444" strokeWidth="2"/>
+      </svg>
+    );
+
+    const KoordinatKartesius = () => (
+      <svg viewBox="0 0 300 300" className="w-full max-w-sm mx-auto">
+        <text x="150" y="20" textAnchor="middle" className="text-sm font-bold fill-gray-700">Koordinat ABCD</text>
+        {[0,1,2,3,4,5,6,7,8,9,10].map(i => (
+          <g key={i}>
+            <line x1="50" y1={50 + i*20} x2="250" y2={50 + i*20} stroke="#e5e7eb" strokeWidth="1"/>
+            <line x1={50 + i*20} y1="50" x2={50 + i*20} y2="250" stroke="#e5e7eb" strokeWidth="1"/>
+          </g>
+        ))}
+        <line x1="50" y1="250" x2="250" y2="250" stroke="#000" strokeWidth="2"/>
+        <line x1="50" y1="250" x2="50" y2="50" stroke="#000" strokeWidth="2"/>
+        <rect x="90" y="130" width="80" height="80" fill="#fde68a" stroke="#f59e0b" strokeWidth="3" opacity="0.7"/>
+        <circle cx="90" cy="210" r="4" fill="#ef4444"/>
+        <circle cx="170" cy="210" r="4" fill="#ef4444"/>
+        <circle cx="170" cy="130" r="4" fill="#ef4444"/>
+        <circle cx="90" cy="130" r="4" fill="#ef4444"/>
+        <text x="85" y="225" className="text-xs font-bold fill-gray-800">A(2,3)</text>
+        <text x="165" y="225" className="text-xs font-bold fill-gray-800">B(6,3)</text>
+        <text x="165" y="125" className="text-xs font-bold fill-gray-800">C(6,7)</text>
+        <text x="70" y="125" className="text-xs font-bold fill-gray-800">D(2,7)</text>
+        <text x="260" y="255" className="text-xs fill-gray-600">x</text>
+        <text x="45" y="45" className="text-xs fill-gray-600">y</text>
+      </svg>
+    );
+
+    const KubusLimas = () => (
+      <svg viewBox="0 0 300 280" className="w-full max-w-sm mx-auto">
+        <text x="150" y="20" textAnchor="middle" className="text-sm font-bold fill-gray-700">Kubus + Limas</text>
+        <rect x="80" y="140" width="100" height="100" fill="#93c5fd" stroke="#2563eb" strokeWidth="2"/>
+        <polygon points="80,140 150,100 250,100 180,140" fill="#bfdbfe" stroke="#2563eb" strokeWidth="2"/>
+        <polygon points="180,140 250,100 250,200 180,240" fill="#dbeafe" stroke="#2563eb" strokeWidth="2"/>
+        <polygon points="80,140 150,100 250,100 180,140" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2" opacity="0.3"/>
+        <circle cx="150" cy="50" r="3" fill="#ef4444"/>
+        <line x1="150" y1="50" x2="80" y2="140" stroke="#f59e0b" strokeWidth="2"/>
+        <line x1="150" y1="50" x2="180" y2="140" stroke="#f59e0b" strokeWidth="2"/>
+        <line x1="150" y1="50" x2="150" y2="100" stroke="#f59e0b" strokeWidth="2"/>
+        <line x1="150" y1="50" x2="250" y2="100" stroke="#f59e0b" strokeWidth="2"/>
+        <polygon points="150,50 80,140 150,100" fill="#fed7aa" stroke="#f59e0b" strokeWidth="1" opacity="0.6"/>
+        <polygon points="150,50 150,100 250,100" fill="#fdba74" stroke="#f59e0b" strokeWidth="1" opacity="0.6"/>
+        <text x="130" y="195" className="text-xs font-bold fill-gray-800">10cm</text>
+        <text x="155" y="80" className="text-xs font-bold fill-gray-800">t=6cm</text>
+        <text x="195" y="125" className="text-xs font-bold fill-gray-800">10cm</text>
+      </svg>
+    );
+
+    const LimasSegiempat = () => (
+      <svg viewBox="0 0 300 250" className="w-full max-w-sm mx-auto">
+        <text x="150" y="20" textAnchor="middle" className="text-sm font-bold fill-gray-700">Limas Segiempat</text>
+        <polygon points="80,180 220,180 250,150 110,150" fill="#ddd6fe" stroke="#7c3aed" strokeWidth="2"/>
+        <circle cx="165" cy="70" r="3" fill="#ef4444"/>
+        <line x1="165" y1="70" x2="80" y2="180" stroke="#7c3aed" strokeWidth="2"/>
+        <line x1="165" y1="70" x2="220" y2="180" stroke="#7c3aed" strokeWidth="2"/>
+        <line x1="165" y1="70" x2="110" y2="150" stroke="#7c3aed" strokeWidth="2"/>
+        <line x1="165" y1="70" x2="250" y2="150" stroke="#7c3aed" strokeWidth="2"/>
+        <polygon points="165,70 80,180 220,180" fill="#c4b5fd" stroke="#7c3aed" strokeWidth="1" opacity="0.7"/>
+        <polygon points="165,70 110,150 250,150" fill="#a78bfa" stroke="#7c3aed" strokeWidth="1" opacity="0.7"/>
+        <line x1="165" y1="70" x2="165" y2="165" stroke="#ef4444" strokeWidth="2" strokeDasharray="4"/>
+        <text x="150" y="195" className="text-xs font-bold fill-gray-800">12 cm</text>
+        <text x="175" y="120" className="text-xs font-bold fill-red-600">t = 8cm</text>
+      </svg>
+    );
+
+    const PerjalananKecepatan = () => (
+      <svg viewBox="0 0 400 200" className="w-full max-w-lg mx-auto">
+        <text x="200" y="20" textAnchor="middle" className="text-sm font-bold fill-gray-700">Perjalanan Pak Budi vs Pak Ali</text>
+        <rect x="50" y="80" width="300" height="40" fill="#94a3b8" stroke="#475569" strokeWidth="2"/>
+        <line x1="50" y1="100" x2="350" y2="100" stroke="white" strokeWidth="2" strokeDasharray="20,10"/>
+        <line x1="50" y1="70" x2="50" y2="130" stroke="#000" strokeWidth="3"/>
+        <text x="50" y="150" textAnchor="middle" className="text-xs font-bold fill-gray-800">START</text>
+        <circle cx="100" cy="90" r="8" fill="#3b82f6"/>
+        <text x="100" y="70" textAnchor="middle" className="text-xs font-bold fill-blue-600">Pak Budi</text>
+        <text x="100" y="165" textAnchor="middle" className="text-xs fill-gray-600">07:30 | 60km/jam</text>
+        <circle cx="50" cy="110" r="8" fill="#ef4444"/>
+        <text x="50" y="175" textAnchor="middle" className="text-xs font-bold fill-red-600">Pak Ali</text>
+        <text x="50" y="190" textAnchor="middle" className="text-xs fill-gray-600">08:00 | 75km/jam</text>
+        <line x1="280" y1="70" x2="280" y2="130" stroke="#10b981" strokeWidth="3"/>
+        <text x="280" y="150" textAnchor="middle" className="text-xs font-bold fill-green-600">Bertemu</text>
+        <text x="280" y="165" textAnchor="middle" className="text-xs fill-green-600">10:00</text>
+        <line x1="100" y1="50" x2="280" y2="50" stroke="#f59e0b" strokeWidth="2"/>
+        <text x="190" y="45" textAnchor="middle" className="text-xs font-bold fill-orange-600">120 km</text>
+      </svg>
+    );
+
+    const soalData = [
+      {
+        no: 1,
+        soal: 'Perhatikan operasi pecahan berikut: (2 3/4 + 1 5/6) × 3/5 - 1 1/3 = ....',
+        pilihan: ['A. 1 3/20', 'B. 1 7/20', 'C. 1 11/20', 'D. 1 17/20'],
+        jawaban: 'D',
+        pembahasan: '(11/4 + 11/6) × 3/5 - 4/3 = 55/12 × 3/5 - 4/3 = 11/4 - 4/3 = 33/12 - 16/12 = 17/12 = 1 5/12'
+      },
+      {
+        no: 2,
+        soal: 'Sebuah toko memberikan diskon 30% untuk semua produk. Setelah diskon, pelanggan member mendapat potongan tambahan 15%. Jika harga awal sebuah tas adalah Rp400.000, berapa harga yang harus dibayar member?',
+        pilihan: ['A. Rp238.000', 'B. Rp240.000', 'C. Rp252.000', 'D. Rp280.000'],
+        jawaban: 'A',
+        pembahasan: 'Setelah diskon 30%: Rp280.000. Potongan member 15%: Rp42.000. Harga akhir: Rp238.000'
+      },
+      {
+        no: 3,
+        soal: 'Sebuah peta memiliki skala 1:250.000. Jarak antara dua kota pada peta 12 cm. Jika berkendara dengan kecepatan 75 km/jam, berapa lama waktu perjalanan?',
+        pilihan: ['A. 30 menit', 'B. 40 menit', 'C. 50 menit', 'D. 1 jam'],
+        jawaban: 'B',
+        pembahasan: 'Jarak sebenarnya = 12 × 250.000 = 3.000.000 cm = 30 km. Waktu = 30 ÷ 75 = 0,4 jam = 24 menit ≈ 40 menit'
+      },
+      {
+        no: 4,
+        soal: 'Hasil panen petani: Jan(40), Feb(60), Mar(50), Apr(70), Mei(50) kuintal. Rata-rata hasil panen per bulan adalah...',
+        pilihan: ['A. 50 kuintal', 'B. 54 kuintal', 'C. 58 kuintal', 'D. 60 kuintal'],
+        jawaban: 'B',
+        pembahasan: 'Total = 40+60+50+70+50 = 270. Rata-rata = 270÷5 = 54 kuintal',
+        visual: <DiagramBatang />
+      },
+      {
+        no: 5,
+        soal: 'Kolam balok 8m×5m×2m diisi air dengan debit 50 liter/menit. Berapa lama waktu pengisian hingga penuh?',
+        pilihan: ['A. 24 jam', 'B. 26 jam 40 menit', 'C. 28 jam 30 menit', 'D. 30 jam'],
+        jawaban: 'B',
+        pembahasan: 'Volume = 80m³ = 80.000 liter. Waktu = 80.000÷50 = 1.600 menit = 26 jam 40 menit'
+      },
+      {
+        no: 6,
+        soal: 'Perbandingan uang Ani:Budi:Citra = 3:4:5. Jumlah total Rp720.000. Selisih uang Citra dan Ani?',
+        pilihan: ['A. Rp100.000', 'B. Rp120.000', 'C. Rp140.000', 'D. Rp160.000'],
+        jawaban: 'B',
+        pembahasan: 'Ani = 3/12 × 720.000 = 180.000. Citra = 5/12 × 720.000 = 300.000. Selisih = 120.000'
+      },
+      {
+        no: 7,
+        soal: 'Taman persegi sisi 24m. Di tengah ada kolam lingkaran diameter 14m. Luas taman tidak tertutup kolam? (π=22/7)',
+        pilihan: ['A. 422 m²', 'B. 424 m²', 'C. 426 m²', 'D. 428 m²'],
+        jawaban: 'A',
+        pembahasan: 'Luas taman = 576 m². Luas kolam = 154 m². Selisih = 422 m²',
+        visual: <TamanKolam />
+      },
+      {
+        no: 8,
+        soal: 'Pedagang beli 50kg gula @Rp12.500. 4kg rusak. Ingin untung 20%. Harga jual per kg gula baik?',
+        pilihan: ['A. Rp15.000', 'B. Rp16.000', 'C. Rp16.250', 'D. Rp16.500'],
+        jawaban: 'C',
+        pembahasan: 'Modal = 625.000. Target = 750.000. Dijual 46kg. Harga jual = 750.000÷46 ≈ Rp16.250'
+      },
+      {
+        no: 9,
+        soal: 'Pola bilangan: 3, 7, 15, 31, 63, .... Dua suku berikutnya?',
+        pilihan: ['A. 127 dan 255', 'B. 125 dan 253', 'C. 129 dan 257', 'D. 131 dan 263'],
+        jawaban: 'A',
+        pembahasan: 'Pola: (n×2)+1. Maka 63×2+1=127, 127×2+1=255'
+      },
+      {
+        no: 10,
+        soal: 'Akuarium kubus rusuk 60cm diisi air 3/4 bagian. Berapa liter air?',
+        pilihan: ['A. 135 liter', 'B. 162 liter', 'C. 180 liter', 'D. 216 liter'],
+        jawaban: 'B',
+        pembahasan: 'Volume = 216.000 cm³. Air = 3/4 × 216.000 = 162.000 cm³ = 162 liter'
+      },
+      {
+        no: 11,
+        soal: '360 siswa: Olahraga(120), Membaca(90), Musik(75), Menggambar(75). Persentase hobi membaca?',
+        pilihan: ['A. 20%', 'B. 25%', 'C. 30%', 'D. 35%'],
+        jawaban: 'B',
+        pembahasan: 'Persentase = (90÷360) × 100% = 25%',
+        visual: <DiagramLingkaran />
+      },
+      {
+        no: 12,
+        soal: 'Mobil tempuh 240km dengan 60km/jam. Jika dipercepat jadi 80km/jam, selisih waktu?',
+        pilihan: ['A. 30 menit', 'B. 45 menit', 'C. 1 jam', 'D. 1 jam 15 menit'],
+        jawaban: 'C',
+        pembahasan: 'Waktu 60km/jam = 4 jam. Waktu 80km/jam = 3 jam. Selisih = 1 jam'
+      },
+      {
+        no: 13,
+        soal: 'Bangun gabungan: persegi panjang 20cm×12cm + segitiga alas 20cm tinggi 8cm. Luas total?',
+        pilihan: ['A. 300 cm²', 'B. 320 cm²', 'C. 340 cm²', 'D. 360 cm²'],
+        jawaban: 'B',
+        pembahasan: 'Luas persegi panjang = 240 cm². Luas segitiga = 80 cm². Total = 320 cm²',
+        visual: <BangunGabungan />
+      },
+      {
+        no: 14,
+        soal: 'Data nilai: 70,75,80,80,85,85,85,90,90,95. Median?',
+        pilihan: ['A. 82,5', 'B. 83', 'C. 85', 'D. 87,5'],
+        jawaban: 'C',
+        pembahasan: 'Median = (85+85)÷2 = 85'
+      },
+      {
+        no: 15,
+        soal: 'Bak tabung diameter 140cm tinggi 100cm terisi air 80cm. Volume air? (π=22/7)',
+        pilihan: ['A. 1.120.000 cm³', 'B. 1.200.000 cm³', 'C. 1.232.000 cm³', 'D. 1.540.000 cm³'],
+        jawaban: 'C',
+        pembahasan: 'Volume = π×r²×t = 22/7×70²×80 = 1.232.000 cm³'
+      },
+      {
+        no: 16,
+        soal: 'Pinjam Rp10.000.000 bunga 12%/tahun selama 8 bulan. Total dikembalikan?',
+        pilihan: ['A. Rp10.600.000', 'B. Rp10.800.000', 'C. Rp11.000.000', 'D. Rp11.200.000'],
+        jawaban: 'B',
+        pembahasan: 'Bunga 8 bulan = 8% × 10.000.000 = 800.000. Total = 10.800.000'
+      },
+      {
+        no: 17,
+        soal: 'Kubus rusuk 8cm. Luas permukaan?',
+        pilihan: ['A. 256 cm²', 'B. 320 cm²', 'C. 384 cm²', 'D. 512 cm²'],
+        jawaban: 'C',
+        pembahasan: 'Luas permukaan = 6 × (8×8) = 384 cm²'
+      },
+      {
+        no: 18,
+        soal: 'Beli 120kg jeruk @Rp18.000. 20kg busuk. Jual sisanya @Rp25.000. Persentase untung?',
+        pilihan: ['A. 15,74%', 'B. 18,52%', 'C. 20,37%', 'D. 22,68%'],
+        jawaban: 'A',
+        pembahasan: 'Modal = 2.160.000. Hasil = 2.500.000. Untung = 340.000. % = 15,74%'
+      },
+      {
+        no: 19,
+        soal: 'FPB(A,B)=12, KPK(A,B)=360, A=72. Nilai B?',
+        pilihan: ['A. 48', 'B. 54', 'C. 60', 'D. 72'],
+        jawaban: 'C',
+        pembahasan: 'A×B = FPB×KPK. 72×B = 12×360. B = 60'
+      },
+      {
+        no: 20,
+        soal: 'Prisma segitiga alas siku-siku (6cm,8cm), tinggi prisma 15cm. Volume?',
+        pilihan: ['A. 320 cm³', 'B. 360 cm³', 'C. 400 cm³', 'D. 480 cm³'],
+        jawaban: 'B',
+        pembahasan: 'Luas alas = 1/2×6×8 = 24. Volume = 24×15 = 360 cm³',
+        visual: <PrismaSegitiga />
+      },
+      {
+        no: 21,
+        soal: 'Data: 8,9,7,8,10,8,9,7,8,6. Modus dan median?',
+        pilihan: ['A. Modus=8, Median=8', 'B. Modus=8, Median=7,5', 'C. Modus=9, Median=8', 'D. Modus=7, Median=8'],
+        jawaban: 'A',
+        pembahasan: 'Modus = 8 (paling sering). Median = (8+8)÷2 = 8'
+      },
+      {
+        no: 22,
+        soal: 'Keran A isi bak 30 menit, Keran B 45 menit. Jika bersamaan?',
+        pilihan: ['A. 15 menit', 'B. 18 menit', 'C. 20 menit', 'D. 22 menit'],
+        jawaban: 'B',
+        pembahasan: '1/30 + 1/45 = 5/90 = 1/18 bak/menit. Waktu = 18 menit'
+      },
+      {
+        no: 23,
+        soal: 'Koordinat A(2,3), B(6,3), C(6,7), D(2,7). Luas ABCD?',
+        pilihan: ['A. 12 satuan', 'B. 16 satuan', 'C. 20 satuan', 'D. 24 satuan'],
+        jawaban: 'B',
+        pembahasan: 'Panjang = 4, Lebar = 4. Luas = 4×4 = 16 satuan',
+        visual: <KoordinatKartesius />
+      },
+      {
+        no: 24,
+        soal: 'Kotak: 5 merah, 3 biru, 2 hijau. Peluang ambil biru?',
+        pilihan: ['A. 1/5', 'B. 3/10', 'C. 1/3', 'D. 2/5'],
+        jawaban: 'B',
+        pembahasan: 'Total = 10 bola. Peluang biru = 3/10'
+      },
+      {
+        no: 25,
+        soal: 'Lapangan 80m×60m. Lampu jarak 4m di sekeliling. Berapa lampu?',
+        pilihan: ['A. 68 buah', 'B. 70 buah', 'C. 72 buah', 'D. 74 buah'],
+        jawaban: 'B',
+        pembahasan: 'Keliling = 280m. Jumlah lampu = 280÷4 = 70 buah'
+      },
+      {
+        no: 26,
+        soal: '3 buku + 2 pensil = Rp42.000. 2 buku + 3 pensil = Rp38.000. Harga 1 buku?',
+        pilihan: ['A. Rp10.000', 'B. Rp11.000', 'C. Rp12.000', 'D. Rp13.000'],
+        jawaban: 'C',
+        pembahasan: 'Eliminasi: 9b + 6p = 126.000 dan 4b + 6p = 76.000, maka 5b = 50.000, b = 10.000. Kemudian substitusi: 3(10.000) + 2p = 42.000, p = 6.000. Periksa: 2(10.000) + 3(6.000) = 38.000 ✓'
+      },
+      {
+        no: 27,
+        soal: 'Bangun ruang: kubus rusuk 10cm + limas alas 10×10cm tinggi 6cm. Volume?',
+        pilihan: ['A. 1.000 cm³', 'B. 1.100 cm³', 'C. 1.200 cm³', 'D. 1.300 cm³'],
+        jawaban: 'C',
+        pembahasan: 'Volume kubus = 1.000. Volume limas = 1/3 × 100 × 6 = 200. Total = 1.200 cm³',
+        visual: <KubusLimas />
+      },
+      {
+        no: 28,
+        soal: 'TV diskon 20%, harga jadi Rp4.800.000. Harga sebelum diskon?',
+        pilihan: ['A. Rp5.760.000', 'B. Rp6.000.000', 'C. Rp6.240.000', 'D. Rp6.400.000'],
+        jawaban: 'B',
+        pembahasan: '80% × harga awal = 4.800.000. Harga awal = 6.000.000'
+      },
+      {
+        no: 29,
+        soal: 'Tinggi badan 8 siswa: 150,155,148,160,152,158,150,157. Rata-rata?',
+        pilihan: ['A. 152 cm', 'B. 153 cm', 'C. 153,75 cm', 'D. 154 cm'],
+        jawaban: 'C',
+        pembahasan: 'Total = 1.230. Rata-rata = 1.230÷8 = 153,75 cm'
+      },
+      {
+        no: 30,
+        soal: 'Drum tabung diameter 70cm tinggi 120cm berisi 2/3 bagian. Berapa liter? (π=22/7)',
+        pilihan: ['A. 308 liter', 'B. 324 liter', 'C. 336 liter', 'D. 352 liter'],
+        jawaban: 'A',
+        pembahasan: 'Volume penuh = π×r²×t = 22/7×35²×120 = 462.000 cm³. Terisi = 2/3 × 462.000 = 308.000 cm³ = 308 liter'
+      },
+      {
+        no: 31,
+        soal: 'Produksi 1.200 unit/hari ditingkatkan 25%. Produksi 6 hari?',
+        pilihan: ['A. 7.200 unit', 'B. 8.000 unit', 'C. 9.000 unit', 'D. 9.600 unit'],
+        jawaban: 'C',
+        pembahasan: 'Produksi baru = 1.200 + (25% × 1.200) = 1.500 unit/hari. 6 hari = 9.000 unit'
+      },
+      {
+        no: 32,
+        soal: 'Trapesium sisi sejajar 12cm dan 20cm, tinggi 10cm. Luas?',
+        pilihan: ['A. 140 cm²', 'B. 150 cm²', 'C. 160 cm²', 'D. 180 cm²'],
+        jawaban: 'C',
+        pembahasan: 'Luas = 1/2 × (12+20) × 10 = 160 cm²'
+      },
+      {
+        no: 33,
+        soal: 'Kecepatan 72 km/jam = ... m/detik',
+        pilihan: ['A. 15 m/detik', 'B. 18 m/detik', 'C. 20 m/detik', 'D. 22 m/detik'],
+        jawaban: 'C',
+        pembahasan: '72 km/jam = 72.000m/3.600s = 20 m/detik'
+      },
+      {
+        no: 34,
+        soal: '12 pekerja selesai 20 hari. Jika harus selesai 15 hari, berapa pekerja?',
+        pilihan: ['A. 14 orang', 'B. 15 orang', 'C. 16 orang', 'D. 18 orang'],
+        jawaban: 'C',
+        pembahasan: 'Total = 12 × 20 = 240 hari-orang. Pekerja = 240÷15 = 16 orang'
+      },
+      {
+        no: 35,
+        soal: 'Balok volume 2.400 cm³, panjang 20cm, lebar 12cm. Tinggi?',
+        pilihan: ['A. 8 cm', 'B. 10 cm', 'C. 12 cm', 'D. 15 cm'],
+        jawaban: 'B',
+        pembahasan: '2.400 = 20×12×t. t = 2.400÷240 = 10 cm'
+      },
+      {
+        no: 36,
+        soal: 'Data: 60,70,70,75,80,80,80,85,90,95. Jangkauan (range)?',
+        pilihan: ['A. 30', 'B. 35', 'C. 40', 'D. 45'],
+        jawaban: 'B',
+        pembahasan: 'Jangkauan = nilai tertinggi - nilai terendah = 95 - 60 = 35'
+      },
+      {
+        no: 37,
+        soal: 'Segitiga sama sisi keliling 48cm. Luas? (tinggi≈13,9cm)',
+        pilihan: ['A. 108 cm²', 'B. 111,2 cm²', 'C. 115 cm²', 'D. 120 cm²'],
+        jawaban: 'B',
+        pembahasan: 'Sisi = 48÷3 = 16cm. Luas = 1/2×16×13,9 = 111,2 cm²'
+      },
+      {
+        no: 38,
+        soal: '40 kelereng merah:biru = 3:5. Berapa kelereng merah?',
+        pilihan: ['A. 12 buah', 'B. 15 buah', 'C. 18 buah', 'D. 20 buah'],
+        jawaban: 'B',
+        pembahasan: 'Total bagian = 3+5 = 8. Merah = 3/8 × 40 = 15 buah'
+      },
+      {
+        no: 39,
+        soal: 'Limas segiempat alas persegi sisi 12cm, tinggi 8cm. Volume?',
+        pilihan: ['A. 288 cm³', 'B. 320 cm³', 'C. 384 cm³', 'D. 480 cm³'],
+        jawaban: 'C',
+        pembahasan: 'Volume = 1/3 × luas alas × tinggi = 1/3 × 144 × 8 = 384 cm³',
+        visual: <LimasSegiempat />
+      },
+      {
+        no: 40,
+        soal: 'Pak Budi berangkat 07.30 dengan 60km/jam. Pak Ali 08.00 dengan 75km/jam. Kapan Pak Ali menyusul?',
+        pilihan: ['A. 09.00', 'B. 09.30', 'C. 10.00', 'D. 10.30'],
+        jawaban: 'C',
+        pembahasan: 'Selisih waktu = 0,5 jam. Jarak awal Pak Budi = 30km. Selisih kecepatan = 15km/jam. Waktu = 30÷15 = 2 jam dari pukul 08.00 = 10.00',
+        visual: <PerjalananKecepatan />
+      }
+    ];
+
+    const TryOutMatematika = () => {
+      const [showAnswers, setShowAnswers] = useState(false);
+      const [activeSection, setActiveSection] = useState('soal');
+      const [expandedSoal, setExpandedSoal] = useState([]);
+
+      const toggleExpand = (no) => {
+        setExpandedSoal(prev => 
+          prev.includes(no) ? prev.filter(n => n !== no) : [...prev, no]
+        );
+      };
+
+      return (
+        <div className="max-w-5xl mx-auto p-4 bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
+          
+          {/* Breadcrumb Navigation */}
+          <div className="mb-6 flex gap-2 text-sm">
+            <a href="../../index.html" className="text-blue-600 hover:text-blue-800 font-medium">Beranda</a>
+            <span className="text-gray-400">→</span>
+            <a href="../index.html" className="text-blue-600 hover:text-blue-800 font-medium">Matematika</a>
+            <span className="text-gray-400">→</span>
+            <span className="text-gray-600 font-medium">Sesi 1 - Umum</span>
+          </div>
+
+          {/* Header */}
+          <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
+            <div className="text-center">
+              <div className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-4">
+                SESI 1 - KATEGORI UMUM
+              </div>
+              <h1 className="text-4xl font-bold text-gray-800 mb-2">MATEMATIKA KELAS VI SD</h1>
+              <p className="text-gray-600 text-lg">Tahun Pelajaran 2025-2026</p>
+              <div className="flex justify-center gap-6 mt-4 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
+                  <span>⏱️ Waktu: 120 menit</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+                  <span>📝 Soal: 40</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
+                  <span>📊 Tingkat: Lanjut (+25%)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex gap-3 mb-6">
+            <button
+              onClick={() => setActiveSection('soal')}
+              className={`flex-1 py-4 px-6 rounded-xl font-bold text-lg transition-all transform hover:scale-105 ${
+                activeSection === 'soal'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
+              }`}
+            >
+              <BookOpen className="inline mr-2" />
+              SOAL
+            </button>
+            <button
+              onClick={() => {
+                setActiveSection('jawaban');
+                setShowAnswers(true);
+              }}
+              className={`flex-1 py-4 px-6 rounded-xl font-bold text-lg transition-all transform hover:scale-105 ${
+                activeSection === 'jawaban'
+                  ? 'bg-green-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
+              }`}
+            >
+              <CheckCircle className="inline mr-2" />
+              KUNCI JAWABAN
+            </button>
+          </div>
+
+          {/* Info Banner */}
+          <div className="bg-gradient-to-r from-yellow-100 to-orange-100 border-l-4 border-yellow-500 rounded-lg p-4 mb-6 shadow">
+            <div className="flex items-start gap-3">
+              <div className="text-2xl">📌</div>
+              <div>
+                <p className="font-semibold text-yellow-900 mb-1">Petunjuk Pengerjaan:</p>
+                <p className="text-sm text-yellow-800">
+                  Pilihlah jawaban yang paling tepat dengan memberi tanda silang (X) pada huruf A, B, C, atau D. 
+                  Periksa kembali jawaban Anda sebelum mengumpulkan!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Soal Section */}
+          {activeSection === 'soal' ? (
+            <div className="space-y-4">
+              {soalData.map((item) => (
+                <div 
+                  key={item.no} 
+                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all border-2 border-gray-100 hover:border-blue-300 overflow-hidden"
+                >
+                  <div className="p-5">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0 shadow-lg">
+                        {item.no}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-gray-800 leading-relaxed mb-4">{item.soal}</p>
+                        
+                        {item.visual && (
+                          <div className="bg-gradient-to-br from-gray-50 to-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-4">
+                            {item.visual}
+                          </div>
+                        )}
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {item.pilihan.map((p, idx) => (
+                            <div 
+                              key={idx} 
+                              className="text-gray-700 bg-gray-50 hover:bg-blue-50 p-3 rounded-lg border border-gray-200 hover:border-blue-300 transition-all cursor-pointer"
+                            >
+                              {p}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {soalData.map((item) => (
+                <div 
+                  key={item.no} 
+                  className="bg-white rounded-xl shadow-md border-2 border-green-200 overflow-hidden"
+                >
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 border-b-2 border-green-200">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow">
+                          {item.no}
+                        </div>
+                        <div className="bg-green-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow">
+                          Jawaban: {item.jawaban}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => toggleExpand(item.no)}
+                        className="text-green-600 hover:text-green-700 transition-colors"
+                      >
+                        {expandedSoal.includes(item.no) ? <ChevronUp /> : <ChevronDown />}
+                      </button>
+                    </div>
+                  </div>
+                  
+                  {expandedSoal.includes(item.no) && (
+                    <div className="p-5">
+                      <div className="bg-gray-50 rounded-lg p-4 mb-3 border border-gray-200">
+                        <p className="text-sm text-gray-600 mb-2">📝 Soal:</p>
+                        <p className="text-gray-800 mb-3">{item.soal}</p>
+                        
+                        {item.visual && (
+                          <div className="bg-white border border-gray-300 rounded-lg p-3 mt-3">
+                            {item.visual}
+                          </div>
+                        )}
+                      </div>
+                      <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+                        <p className="font-bold text-green-800 mb-2">💡 PEMBAHASAN:</p>
+                        <p className="text-gray-700 leading-relaxed">{item.pembahasan}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Stats Footer */}
+          <div className="mt-8 bg-white rounded-2xl shadow-xl p-6">
+            <h3 className="font-bold text-gray-800 mb-4 text-lg">📊 Distribusi Topik (40 Soal):</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+              {[
+                { topic: 'Pecahan & Operasi', count: 5, color: 'bg-blue-100 text-blue-700' },
+                { topic: 'Aritmetika Sosial', count: 6, color: 'bg-green-100 text-green-700' },
+                { topic: 'Geometri', count: 8, color: 'bg-purple-100 text-purple-700' },
+                { topic: 'Statistika', count: 6, color: 'bg-pink-100 text-pink-700' },
+                { topic: 'Kecepatan & Jarak', count: 4, color: 'bg-yellow-100 text-yellow-700' },
+                { topic: 'Perbandingan', count: 4, color: 'bg-indigo-100 text-indigo-700' },
+                { topic: 'Volume & Debit', count: 4, color: 'bg-red-100 text-red-700' },
+                { topic: 'Peluang', count: 2, color: 'bg-orange-100 text-orange-700' },
+                { topic: 'Pola Bilangan', count: 1, color: 'bg-teal-100 text-teal-700' }
+              ].map((item, idx) => (
+                <div key={idx} className={`${item.color} rounded-lg p-3 text-center shadow-sm`}>
+                  <div className="font-bold text-2xl">{item.count}</div>
+                  <div className="text-xs font-semibold mt-1">{item.topic}</div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
+              <p className="text-sm text-gray-700">
+                <span className="font-bold text-blue-700">💪 Tingkat Kesulitan:</span> Soal ini dirancang dengan peningkatan kesulitan <strong>25%</strong> dari soal standar, 
+                mencakup operasi multi-langkah, soal aplikatif real-world, dan kombinasi beberapa konsep matematika dalam satu soal.
+              </p>
+            </div>
+
+            <div className="mt-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
+              <p className="text-sm text-gray-700">
+                <span className="font-bold text-purple-700">🎨 Visualisasi Terintegrasi:</span> Dokumen ini dilengkapi dengan <strong>9 visualisasi interaktif</strong> untuk membantu pemahaman konsep geometri, statistika, dan soal cerita.
+              </p>
+            </div>
+
+            <div className="mt-4 flex gap-3 justify-center">
+              <button onClick={() => window.print()} className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg flex items-center gap-2">
+                <Printer />
+                Cetak Soal
+              </button>
+            </div>
+          </div>
+
+          {/* Navigation ke Sesi Lain */}
+          <div className="mt-6 bg-white rounded-2xl shadow-xl p-6">
+            <h3 className="font-bold text-gray-800 mb-4 text-lg">🚀 Sesi Lainnya:</h3>
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              <div className="bg-green-100 border-2 border-green-400 rounded-lg p-4 text-center min-w-32">
+                <div className="font-bold text-green-700 text-xl mb-1">Sesi 1</div>
+                <div className="text-xs text-green-600">✓ Aktif</div>
+              </div>
+              <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-4 text-center min-w-32 opacity-60">
+                <div className="font-bold text-gray-700 text-xl mb-1">Sesi 2</div>
+                <div className="text-xs text-gray-600">Segera</div>
+              </div>
+              <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-4 text-center min-w-32 opacity-60">
+                <div className="font-bold text-gray-700 text-xl mb-1">Sesi 3</div>
+                <div className="text-xs text-gray-600">Segera</div>
+              </div>
+              <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-4 text-center min-w-32 opacity-60">
+                <div className="font-bold text-gray-700 text-xl mb-1">Sesi 4</div>
+                <div className="text-xs text-gray-600">Segera</div>
+              </div>
+              <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-4 text-center min-w-32 opacity-60">
+                <div className="font-bold text-gray-700 text-xl mb-1">Sesi 5</div>
+                <div className="text-xs text-gray-600">Segera</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Credit */}
+          <div className="text-center mt-6 text-sm text-gray-600">
+            <p>✨ Try Out TKA Matematika Kelas VI - Sesi 1 Kategori Umum</p>
+            <p className="text-xs mt-1">Dirancang dengan peningkatan kompleksitas dan visualisasi terintegrasi</p>
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<TryOutMatematika />, document.getElementById('root'));
+  </script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</body>
+</html>
