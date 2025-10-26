@@ -1,1 +1,814 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operasi Bilangan Sesi 1 - Try Out Matematika Kelas VI</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
 
+  <script type="text/babel" data-type="module">
+    const { useState } = React;
+
+    // Icon Components
+    const ChevronDown = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"></polyline></svg>;
+    const ChevronUp = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="18 15 12 9 6 15"></polyline></svg>;
+    const BookOpen = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>;
+    const CheckCircle = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
+    const Printer = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>;
+
+    // Visualization Components
+    const DiagramUangJajan = () => (
+      <svg viewBox="0 0 500 300" className="w-full max-w-lg mx-auto">
+        <text x="250" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Uang Jajan Budi Seminggu</text>
+        
+        {/* Dompet */}
+        <rect x="180" y="60" width="140" height="80" rx="10" fill="#8b5cf6" stroke="#6d28d9" strokeWidth="3"/>
+        <circle cx="250" cy="100" r="12" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2"/>
+        
+        {/* Label uang */}
+        <text x="250" y="105" textAnchor="middle" className="text-lg font-bold fill-white">Rp 70.000</text>
+        
+        {/* Breakdown */}
+        <g transform="translate(50, 160)">
+          <rect x="0" y="0" width="80" height="40" rx="5" fill="#34d399" stroke="#10b981" strokeWidth="2"/>
+          <text x="40" y="25" textAnchor="middle" className="text-xs font-bold fill-white">Senin-Rabu</text>
+          <text x="40" y="55" textAnchor="middle" className="text-xs font-bold fill-gray-700">3/7 bagian</text>
+        </g>
+        
+        <g transform="translate(150, 160)">
+          <rect x="0" y="0" width="80" height="40" rx="5" fill="#60a5fa" stroke="#3b82f6" strokeWidth="2"/>
+          <text x="40" y="25" textAnchor="middle" className="text-xs font-bold fill-white">Kamis-Jumat</text>
+          <text x="40" y="55" textAnchor="middle" className="text-xs font-bold fill-gray-700">2/7 bagian</text>
+        </g>
+        
+        <g transform="translate(250, 160)">
+          <rect x="0" y="0" width="80" height="40" rx="5" fill="#f87171" stroke="#ef4444" strokeWidth="2"/>
+          <text x="40" y="25" textAnchor="middle" className="text-xs font-bold fill-white">Sabtu-Minggu</text>
+          <text x="40" y="55" textAnchor="middle" className="text-xs font-bold fill-gray-700">2/7 bagian</text>
+        </g>
+        
+        <text x="250" y="230" textAnchor="middle" className="text-xs fill-gray-600 italic">Total: 3/7 + 2/7 + 2/7 = 7/7 (semua uang terpakai)</text>
+      </svg>
+    );
+
+    const PembagianPizza = () => (
+      <svg viewBox="0 0 400 350" className="w-full max-w-md mx-auto">
+        <text x="200" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Pembagian Pizza untuk 4 Anak</text>
+        
+        {/* Pizza 1 */}
+        <circle cx="120" cy="120" r="60" fill="#fbbf24" stroke="#f59e0b" strokeWidth="3"/>
+        <line x1="120" y1="60" x2="120" y2="180" stroke="#f59e0b" strokeWidth="2"/>
+        <line x1="60" y1="120" x2="180" y2="120" stroke="#f59e0b" strokeWidth="2"/>
+        <text x="120" y="200" textAnchor="middle" className="text-xs font-bold fill-gray-700">Pizza Utuh</text>
+        
+        {/* Pizza 2 */}
+        <circle cx="280" cy="120" r="60" fill="#fbbf24" stroke="#f59e0b" strokeWidth="3"/>
+        <line x1="280" y1="60" x2="280" y2="180" stroke="#f59e0b" strokeWidth="2"/>
+        <line x1="220" y1="120" x2="340" y2="120" stroke="#f59e0b" strokeWidth="2"/>
+        <path d="M 280 120 L 280 60 A 60 60 0 0 1 340 120 Z" fill="#ef4444" opacity="0.5"/>
+        <text x="280" y="200" textAnchor="middle" className="text-xs font-bold fill-gray-700">Tersisa 3/4</text>
+        
+        {/* Tanda panah */}
+        <text x="200" y="110" textAnchor="middle" className="text-2xl">→</text>
+        
+        {/* Perhitungan */}
+        <rect x="50" y="230" width="300" height="80" rx="8" fill="#dbeafe" stroke="#3b82f6" strokeWidth="2"/>
+        <text x="200" y="255" textAnchor="middle" className="text-sm font-bold fill-gray-800">Setiap anak dapat:</text>
+        <text x="200" y="275" textAnchor="middle" className="text-xs fill-gray-700">Pizza 1: 1/4 bagian</text>
+        <text x="200" y="290" textAnchor="middle" className="text-xs fill-gray-700">Pizza 2: 3/4 ÷ 4 = 3/16 bagian</text>
+        <text x="200" y="305" textAnchor="middle" className="text-xs font-bold fill-blue-700">Total: 1/4 + 3/16 = ?</text>
+      </svg>
+    );
+
+    const KoleksiKartuPokemon = () => (
+      <svg viewBox="0 0 450 320" className="w-full max-w-lg mx-auto">
+        <text x="225" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Koleksi Kartu Pokemon Adi & Bima</text>
+        
+        {/* Adi */}
+        <g transform="translate(50, 50)">
+          <rect x="0" y="0" width="150" height="100" rx="8" fill="#a78bfa" stroke="#7c3aed" strokeWidth="3"/>
+          <text x="75" y="30" textAnchor="middle" className="text-lg font-bold fill-white">ADI</text>
+          <text x="75" y="55" textAnchor="middle" className="text-sm fill-white">36 kartu</text>
+          <text x="75" y="75" textAnchor="middle" className="text-xs fill-white">Kelipatan: 4, 6, 9, 12, ...</text>
+        </g>
+        
+        {/* Bima */}
+        <g transform="translate(250, 50)">
+          <rect x="0" y="0" width="150" height="100" rx="8" fill="#34d399" stroke="#10b981" strokeWidth="3"/>
+          <text x="75" y="30" textAnchor="middle" className="text-lg font-bold fill-white">BIMA</text>
+          <text x="75" y="55" textAnchor="middle" className="text-sm fill-white">48 kartu</text>
+          <text x="75" y="75" textAnchor="middle" className="text-xs fill-white">Kelipatan: 4, 6, 8, 12, ...</text>
+        </g>
+        
+        {/* FPB */}
+        <g transform="translate(75, 180)">
+          <circle cx="75" cy="40" r="50" fill="#fbbf24" stroke="#f59e0b" strokeWidth="3"/>
+          <text x="75" y="35" textAnchor="middle" className="text-sm font-bold fill-gray-800">FPB</text>
+          <text x="75" y="55" textAnchor="middle" className="text-xl font-bold fill-gray-800">?</text>
+        </g>
+        
+        {/* KPK */}
+        <g transform="translate(225, 180)">
+          <circle cx="75" cy="40" r="50" fill="#f87171" stroke="#ef4444" strokeWidth="3"/>
+          <text x="75" y="35" textAnchor="middle" className="text-sm font-bold fill-white">KPK</text>
+          <text x="75" y="55" textAnchor="middle" className="text-xl font-bold fill-white">?</text>
+        </g>
+        
+        <text x="225" y="280" textAnchor="middle" className="text-xs fill-gray-600">Mereka ingin menukar kartu dengan kelompok sama besar</text>
+        <text x="225" y="295" textAnchor="middle" className="text-xs fill-gray-600 italic">Berapa kartu terbanyak per kelompok? (FPB)</text>
+      </svg>
+    );
+
+    const DiagramNilaiUlangan = () => (
+      <svg viewBox="0 0 450 300" className="w-full max-w-lg mx-auto">
+        <text x="225" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Nilai Ulangan Matematika 5 Siswa</text>
+        
+        {/* Grid */}
+        {[0,1,2,3,4,5].map(i => (
+          <line key={i} x1="60" y1={240 - i*40} x2="400" y2={240 - i*40} stroke="#e5e7eb" strokeWidth="1"/>
+        ))}
+        
+        {/* Axes */}
+        <line x1="60" y1="240" x2="400" y2="240" stroke="#333" strokeWidth="2"/>
+        <line x1="60" y1="240" x2="60" y2="40" stroke="#333" strokeWidth="2"/>
+        
+        {/* Bars with values */}
+        {[
+          {name: 'Ani', score: 85, color: '#3b82f6'},
+          {name: 'Budi', score: 90, color: '#10b981'},
+          {name: 'Citra', score: 78, color: '#f59e0b'},
+          {name: 'Doni', score: 82, color: '#ef4444'},
+          {name: 'Eka', score: 95, color: '#8b5cf6'}
+        ].map((student, idx) => {
+          const x = 90 + idx * 60;
+          const height = (student.score / 100) * 200;
+          return (
+            <g key={idx}>
+              <rect x={x-20} y={240-height} width="40" height={height} fill={student.color} stroke="#333" strokeWidth="1"/>
+              <text x={x} y={235-height} textAnchor="middle" className="text-xs font-bold fill-gray-800">{student.score}</text>
+              <text x={x} y="260" textAnchor="middle" className="text-xs fill-gray-600">{student.name}</text>
+            </g>
+          );
+        })}
+        
+        {/* Y-axis labels */}
+        {[0,20,40,60,80,100].map((val, idx) => (
+          <text key={idx} x="50" y={245 - (val/100)*200} textAnchor="end" className="text-xs fill-gray-600">{val}</text>
+        ))}
+        
+        <text x="225" y="285" textAnchor="middle" className="text-xs fill-gray-600 italic">Rata-rata kelas = ?</text>
+      </svg>
+    );
+
+    const TimbanganBilangan = () => (
+      <svg viewBox="0 0 400 280" className="w-full max-w-md mx-auto">
+        <text x="200" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Timbangan Seimbang</text>
+        
+        {/* Timbangan base */}
+        <rect x="180" y="150" width="40" height="80" fill="#64748b" stroke="#475569" strokeWidth="2"/>
+        <polygon points="200,150 100,120 300,120" fill="#94a3b8" stroke="#64748b" strokeWidth="2"/>
+        
+        {/* Sisi kiri */}
+        <rect x="50" y="80" width="100" height="40" rx="5" fill="#3b82f6" stroke="#2563eb" strokeWidth="2"/>
+        <text x="100" y="105" textAnchor="middle" className="text-sm font-bold fill-white">3× + 12</text>
+        <line x1="100" y1="80" x2="100" y2="120" stroke="#64748b" strokeWidth="3"/>
+        
+        {/* Sisi kanan */}
+        <rect x="250" y="80" width="100" height="40" rx="5" fill="#10b981" stroke="#059669" strokeWidth="2"/>
+        <text x="300" y="105" textAnchor="middle" className="text-sm font-bold fill-white">48</text>
+        <line x1="300" y1="80" x2="300" y2="120" stroke="#64748b" strokeWidth="3"/>
+        
+        {/* Tanda sama dengan */}
+        <circle cx="200" cy="180" r="15" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2"/>
+        <text x="200" y="185" textAnchor="middle" className="text-lg font-bold fill-gray-800">=</text>
+        
+        <text x="200" y="240" textAnchor="middle" className="text-sm font-bold fill-gray-700">Berapakah nilai ×?</text>
+        <text x="200" y="260" textAnchor="middle" className="text-xs fill-gray-600 italic">3× + 12 = 48</text>
+      </svg>
+    );
+
+    const DiagramWaktuBelajar = () => (
+      <svg viewBox="0 0 450 380" className="w-full max-w-lg mx-auto">
+        <text x="225" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Waktu Belajar Sinta dalam Sehari (12 jam)</text>
+        
+        {/* Pie chart */}
+        <g transform="translate(225, 180)">
+          {/* Matematika 25% */}
+          <path d="M 0,-100 A 100,100 0 0,1 70.7,-70.7 L 0,0 Z" fill="#3b82f6" stroke="white" strokeWidth="2"/>
+          <text x="35" y="-60" textAnchor="middle" className="text-xs font-bold fill-white">Mat</text>
+          <text x="35" y="-48" textAnchor="middle" className="text-xs fill-white">25%</text>
+          
+          {/* IPA 20% */}
+          <path d="M 70.7,-70.7 A 100,100 0 0,1 95.1,-30.9 L 0,0 Z" fill="#10b981" stroke="white" strokeWidth="2"/>
+          <text x="75" y="-35" textAnchor="middle" className="text-xs font-bold fill-white">IPA 20%</text>
+          
+          {/* B.Indonesia 15% */}
+          <path d="M 95.1,-30.9 A 100,100 0 0,1 80.9,58.8 L 0,0 Z" fill="#f59e0b" stroke="white" strokeWidth="2"/>
+          <text x="80" y="15" textAnchor="middle" className="text-xs font-bold fill-white">BI 15%</text>
+          
+          {/* Istirahat 40% */}
+          <path d="M 80.9,58.8 A 100,100 0 0,1 0,-100 L 0,0 Z" fill="#ef4444" stroke="white" strokeWidth="2"/>
+          <text x="-40" y="20" textAnchor="middle" className="text-xs font-bold fill-white">Istirahat</text>
+          <text x="-40" y="32" textAnchor="middle" className="text-xs fill-white">40%</text>
+        </g>
+        
+        {/* Legend */}
+        <g transform="translate(50, 310)">
+          <rect x="0" y="0" width="15" height="15" fill="#3b82f6"/>
+          <text x="20" y="12" className="text-xs fill-gray-700">Matematika: 3 jam</text>
+          
+          <rect x="120" y="0" width="15" height="15" fill="#10b981"/>
+          <text x="140" y="12" className="text-xs fill-gray-700">IPA: ? jam</text>
+          
+          <rect x="230" y="0" width="15" height="15" fill="#f59e0b"/>
+          <text x="250" y="12" className="text-xs fill-gray-700">B.Indonesia: ? jam</text>
+          
+          <rect x="0" y="25" width="15" height="15" fill="#ef4444"/>
+          <text x="20" y="37" className="text-xs fill-gray-700">Istirahat: ? jam</text>
+        </g>
+        
+        <text x="225" y="365" textAnchor="middle" className="text-xs fill-gray-600 italic">Jika 25% = 3 jam, berapa jam untuk kegiatan lainnya?</text>
+      </svg>
+    );
+
+    const DenahKebunSekolah = () => (
+      <svg viewBox="0 0 400 350" className="w-full max-w-md mx-auto">
+        <text x="200" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Denah Kebun Sekolah Berbentuk Persegi</text>
+        
+        {/* Kebun besar */}
+        <rect x="80" y="60" width="240" height="240" fill="#86efac" stroke="#22c55e" strokeWidth="3"/>
+        
+        {/* Grid 4x4 */}
+        <line x1="140" y1="60" x2="140" y2="300" stroke="#16a34a" strokeWidth="1" strokeDasharray="5"/>
+        <line x1="200" y1="60" x2="200" y2="300" stroke="#16a34a" strokeWidth="1" strokeDasharray="5"/>
+        <line x1="260" y1="60" x2="260" y2="300" stroke="#16a34a" strokeWidth="1" strokeDasharray="5"/>
+        
+        <line x1="80" y1="120" x2="320" y2="120" stroke="#16a34a" strokeWidth="1" strokeDasharray="5"/>
+        <line x1="80" y1="180" x2="320" y2="180" stroke="#16a34a" strokeWidth="1" strokeDasharray="5"/>
+        <line x1="80" y1="240" x2="320" y2="240" stroke="#16a34a" strokeWidth="1" strokeDasharray="5"/>
+        
+        {/* Petak tomat */}
+        <rect x="80" y="60" width="60" height="60" fill="#ef4444" opacity="0.6" stroke="#dc2626" strokeWidth="2"/>
+        <rect x="140" y="120" width="60" height="60" fill="#ef4444" opacity="0.6" stroke="#dc2626" strokeWidth="2"/>
+        <rect x="200" y="180" width="60" height="60" fill="#ef4444" opacity="0.6" stroke="#dc2626" strokeWidth="2"/>
+        <rect x="260" y="240" width="60" height="60" fill="#ef4444" opacity="0.6" stroke="#dc2626" strokeWidth="2"/>
+        
+        {/* Labels */}
+        <text x="200" y="45" textAnchor="middle" className="text-xs font-bold fill-gray-700">16 m</text>
+        <line x1="80" y1="35" x2="320" y2="35" stroke="#333" strokeWidth="2"/>
+        
+        <text x="330" y="180" textAnchor="start" className="text-xs font-bold fill-gray-700">16 m</text>
+        <line x1="330" y1="60" x2="330" y2="300" stroke="#333" strokeWidth="2"/>
+        
+        <text x="110" y="95" textAnchor="middle" className="text-xs font-bold fill-white">🍅</text>
+        <text x="170" y="155" textAnchor="middle" className="text-xs font-bold fill-white">🍅</text>
+        <text x="230" y="215" textAnchor="middle" className="text-xs font-bold fill-white">🍅</text>
+        <text x="290" y="275" textAnchor="middle" className="text-xs font-bold fill-white">🍅</text>
+        
+        <text x="200" y="325" textAnchor="middle" className="text-xs fill-gray-600">Luas total = 16² = ? m²</text>
+        <text x="200" y="340" textAnchor="middle" className="text-xs fill-gray-600 italic">Luas 4 petak tomat = 4 × (4²) = ? m²</text>
+      </svg>
+    );
+
+    const StukBelanjaToko = () => (
+      <svg viewBox="0 0 420 450" className="w-full max-w-lg mx-auto">
+        <text x="210" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Struk Belanja Ani di Toko Buku</text>
+        
+        {/* Struk */}
+        <rect x="60" y="50" width="300" height="320" rx="10" fill="white" stroke="#cbd5e1" strokeWidth="2"/>
+        <rect x="60" y="50" width="300" height="40" rx="10" fill="#3b82f6" stroke="#2563eb" strokeWidth="2"/>
+        <text x="210" y="75" textAnchor="middle" className="text-sm font-bold fill-white">TOKO BUKU CERDAS</text>
+        
+        {/* Header */}
+        <text x="80" y="115" className="text-xs font-bold fill-gray-700">Item</text>
+        <text x="240" y="115" textAnchor="end" className="text-xs font-bold fill-gray-700">Harga</text>
+        <text x="330" y="115" textAnchor="end" className="text-xs font-bold fill-gray-700">Total</text>
+        <line x1="70" y1="120" x2="350" y2="120" stroke="#cbd5e1" strokeWidth="1"/>
+        
+        {/* Items */}
+        <g transform="translate(0, 130)">
+          {/* Buku tulis */}
+          <text x="80" y="10" className="text-xs fill-gray-700">Buku Tulis (3×)</text>
+          <text x="240" y="10" textAnchor="end" className="text-xs fill-gray-700">@Rp 8.500</text>
+          <text x="330" y="10" textAnchor="end" className="text-xs font-bold fill-gray-700">Rp 25.500</text>
+          
+          {/* Pensil */}
+          <text x="80" y="35" className="text-xs fill-gray-700">Pensil (2×)</text>
+          <text x="240" y="35" textAnchor="end" className="text-xs fill-gray-700">@Rp 3.500</text>
+          <text x="330" y="35" textAnchor="end" className="text-xs font-bold fill-gray-700">Rp 7.000</text>
+          
+          {/* Penghapus */}
+          <text x="80" y="60" className="text-xs fill-gray-700">Penghapus (1×)</text>
+          <text x="240" y="60" textAnchor="end" className="text-xs fill-gray-700">@Rp 4.000</text>
+          <text x="330" y="60" textAnchor="end" className="text-xs font-bold fill-gray-700">Rp 4.000</text>
+        </g>
+        
+        <line x1="70" y1="205" x2="350" y2="205" stroke="#cbd5e1" strokeWidth="1"/>
+        
+        {/* Subtotal */}
+        <text x="240" y="225" textAnchor="end" className="text-xs font-bold fill-gray-700">Subtotal:</text>
+        <text x="330" y="225" textAnchor="end" className="text-xs font-bold fill-gray-700">Rp 36.500</text>
+        
+        {/* Diskon */}
+        <rect x="70" y="235" width="280" height="30" rx="5" fill="#fef3c7" stroke="#fbbf24" strokeWidth="1"/>
+        <text x="240" y="255" textAnchor="end" className="text-xs font-bold fill-orange-700">Diskon 10%:</text>
+        <text x="330" y="255" textAnchor="end" className="text-xs font-bold fill-orange-700">- Rp 3.650</text>
+        
+        <line x1="70" y1="280" x2="350" y2="280" stroke="#334155" strokeWidth="2"/>
+        
+        {/* Total */}
+        <rect x="70" y="290" width="280" height="35" rx="5" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
+        <text x="240" y="313" textAnchor="end" className="text-sm font-bold fill-green-700">TOTAL BAYAR:</text>
+        <text x="330" y="313" textAnchor="end" className="text-sm font-bold fill-green-700">Rp ?</text>
+        
+        {/* Footer */}
+        <text x="210" y="350" textAnchor="middle" className="text-xs fill-gray-500">Uang Ani: Rp 150.000</text>
+        <text x="210" y="365" textAnchor="middle" className="text-xs fill-gray-500 italic">Kembalian: Rp ?</text>
+        
+        {/* Ilustrasi barang */}
+        <g transform="translate(80, 380)">
+          <rect x="0" y="0" width="25" height="35" rx="2" fill="#3b82f6" stroke="#2563eb" strokeWidth="1"/>
+          <text x="12" y="50" textAnchor="middle" className="text-xs fill-gray-600">📓</text>
+        </g>
+        <g transform="translate(130, 380)">
+          <rect x="0" y="0" width="6" height="35" rx="1" fill="#fbbf24" stroke="#f59e0b" strokeWidth="1"/>
+          <text x="3" y="50" textAnchor="middle" className="text-xs fill-gray-600">✏️</text>
+        </g>
+        <g transform="translate(180, 385)">
+          <rect x="0" y="0" width="20" height="25" rx="3" fill="#ef4444" stroke="#dc2626" strokeWidth="1"/>
+          <text x="10" y="40" textAnchor="middle" className="text-xs fill-gray-600">🧹</text>
+        </g>
+      </svg>
+    );
+
+    const soalData = [
+      // OPERASI BILANGAN BULAT (5 soal) - 1 visualisasi
+      {
+        no: 1,
+        soal: 'Suhu di kota Bandung pada pagi hari adalah 18°C. Pada siang hari suhu naik 9°C, kemudian pada malam hari turun 15°C. Berapa suhu di Bandung pada malam hari?',
+        pilihan: ['A. 10°C', 'B. 11°C', 'C. 12°C', 'D. 13°C'],
+        jawaban: 'C',
+        pembahasan: 'Suhu awal = 18°C. Siang hari: 18 + 9 = 27°C. Malam hari: 27 - 15 = 12°C.'
+      },
+      {
+        no: 2,
+        soal: 'Hasil dari (-15) × 8 + 45 ÷ (-5) = ...',
+        pilihan: ['A. -129', 'B. -120', 'C. -111', 'D. -102'],
+        jawaban: 'A',
+        pembahasan: '(-15) × 8 = -120. Kemudian 45 ÷ (-5) = -9. Jadi -120 + (-9) = -129.'
+      },
+      {
+        no: 3,
+        soal: 'Budi punya uang Rp75.000. Ia membeli 3 buku seharga @Rp12.500, lalu mendapat uang tambahan Rp20.000 dari ayahnya. Kemudian ia membeli pensil warna seharga Rp32.500. Berapa sisa uang Budi?',
+        pilihan: ['A. Rp25.000', 'B. Rp28.000', 'C. Rp30.000', 'D. Rp32.500'],
+        jawaban: 'A',
+        pembahasan: 'Uang awal = 75.000. Beli buku: 75.000 - (3 × 12.500) = 75.000 - 37.500 = 37.500. Dapat tambahan: 37.500 + 20.000 = 57.500. Beli pensil: 57.500 - 32.500 = 25.000.',
+        visual: <DiagramUangJajan />
+      },
+      {
+        no: 4,
+        soal: 'Jika 3× + 12 = 48, maka nilai × adalah...',
+        pilihan: ['A. 10', 'B. 11', 'C. 12', 'D. 14'],
+        jawaban: 'C',
+        pembahasan: '3× + 12 = 48 → 3× = 48 - 12 → 3× = 36 → × = 36 ÷ 3 = 12.',
+        visual: <TimbanganBilangan />
+      },
+      {
+        no: 5,
+        soal: 'Hasil dari 125 ÷ (-5) × (-3) + 18 = ...',
+        pilihan: ['A. 73', 'B. 75', 'C. 93', 'D. 95'],
+        jawaban: 'C',
+        pembahasan: '125 ÷ (-5) = -25. Kemudian -25 × (-3) = 75. Terakhir 75 + 18 = 93.'
+      },
+
+      // OPERASI PECAHAN (6 soal) - 2 visualisasi
+      {
+        no: 6,
+        soal: 'Budi mendapat uang jajan Rp70.000 untuk seminggu. Ia menghabiskan 3/7 bagian untuk Senin-Rabu, 2/7 bagian untuk Kamis-Jumat. Berapa uang yang tersisa untuk Sabtu-Minggu?',
+        pilihan: ['A. Rp15.000', 'B. Rp20.000', 'C. Rp25.000', 'D. Rp30.000'],
+        jawaban: 'B',
+        pembahasan: 'Total terpakai = 3/7 + 2/7 = 5/7. Sisa = 1 - 5/7 = 2/7. Uang sisa = 2/7 × 70.000 = 20.000.',
+        visual: <DiagramUangJajan />
+      },
+      {
+        no: 7,
+        soal: 'Hasil dari 2¾ + 1⅚ - 1¼ = ...',
+        pilihan: ['A. 3 1/6', 'B. 3 1/3', 'C. 3 5/12', 'D. 3 7/12'],
+        jawaban: 'B',
+        pembahasan: '2¾ = 11/4, 1⅚ = 11/6, 1¼ = 5/4. Samakan penyebut: 33/12 + 22/12 - 15/12 = 40/12 = 10/3 = 3⅓.'
+      },
+      {
+        no: 8,
+        soal: 'Sebuah pizza dipotong menjadi 4 bagian sama besar. Ani makan 1 potong dari pizza pertama. Kemudian pizza kedua tersisa ¾ bagian dan dibagi rata untuk 4 anak. Berapa bagian pizza yang didapat setiap anak dari pizza kedua?',
+        pilihan: ['A. 1/8', 'B. 3/16', 'C. 1/4', 'D. 5/16'],
+        jawaban: 'B',
+        pembahasan: 'Pizza kedua tersisa ¾. Dibagi 4 anak: ¾ ÷ 4 = ¾ × ¼ = 3/16 bagian per anak.',
+        visual: <PembagianPizza />
+      },
+      {
+        no: 9,
+        soal: 'Hasil dari (3⅓ × 1½) ÷ 2½ = ...',
+        pilihan: ['A. 1½', 'B. 2', 'C. 2½', 'D. 3'],
+        jawaban: 'B',
+        pembahasan: '3⅓ = 10/3, 1½ = 3/2, 2½ = 5/2. (10/3 × 3/2) ÷ 5/2 = 15/3 ÷ 5/2 = 5 × 2/5 = 2.'
+      },
+      {
+        no: 10,
+        soal: 'Ibu membeli 5 kg gula. Digunakan 1⅔ kg untuk membuat kue, kemudian 1¾ kg untuk membuat sirup. Berapa kg sisa gula ibu?',
+        pilihan: ['A. 1 5/12 kg', 'B. 1 7/12 kg', 'C. 1 9/12 kg', 'D. 2 kg'],
+        jawaban: 'B',
+        pembahasan: 'Total digunakan = 1⅔ + 1¾ = 5/3 + 7/4 = 20/12 + 21/12 = 41/12 = 3 5/12 kg. Sisa = 5 - 3 5/12 = 1 7/12 kg.'
+      },
+      {
+        no: 11,
+        soal: 'Jika 2/5 dari suatu bilangan adalah 24, maka 3/4 dari bilangan tersebut adalah...',
+        pilihan: ['A. 40', 'B. 42', 'C. 45', 'D. 48'],
+        jawaban: 'C',
+        pembahasan: 'Bilangan = 24 ÷ 2/5 = 24 × 5/2 = 60. Maka 3/4 × 60 = 45.'
+      },
+
+      // DESIMAL & PERSEN (5 soal) - 2 visualisasi
+      {
+        no: 12,
+        soal: 'Hasil dari 3,75 × 0,8 + 2,5 = ...',
+        pilihan: ['A. 5,4', 'B. 5,5', 'C. 5,6', 'D. 5,7'],
+        jawaban: 'B',
+        pembahasan: '3,75 × 0,8 = 3. Kemudian 3 + 2,5 = 5,5.'
+      },
+      {
+        no: 13,
+        soal: 'Sebuah toko memberikan diskon 25% untuk semua barang. Jika harga awal sebuah tas adalah Rp160.000, berapa harga setelah diskon?',
+        pilihan: ['A. Rp100.000', 'B. Rp110.000', 'C. Rp120.000', 'D. Rp130.000'],
+        jawaban: 'C',
+        pembahasan: 'Diskon = 25% × 160.000 = 40.000. Harga setelah diskon = 160.000 - 40.000 = 120.000.'
+      },
+      {
+        no: 14,
+        soal: 'Nilai rata-rata ulangan 5 siswa adalah: Ani(85), Budi(90), Citra(78), Doni(82), Eka(95). Berapa rata-rata nilai mereka?',
+        pilihan: ['A. 84', 'B. 85', 'C. 86', 'D. 87'],
+        jawaban: 'C',
+        pembahasan: 'Total nilai = 85 + 90 + 78 + 82 + 95 = 430. Rata-rata = 430 ÷ 5 = 86.',
+        visual: <DiagramNilaiUlangan />
+      },
+      {
+        no: 15,
+        soal: 'Sinta belajar 12 jam sehari. Jika ia belajar Matematika 25% dari waktu tersebut (3 jam), berapa jam ia belajar IPA yang menghabiskan 20% waktu?',
+        pilihan: ['A. 2 jam', 'B. 2,2 jam', 'C. 2,4 jam', 'D. 2,5 jam'],
+        jawaban: 'C',
+        pembahasan: '20% dari 12 jam = 0,2 × 12 = 2,4 jam.',
+        visual: <DiagramWaktuBelajar />
+      },
+      {
+        no: 16,
+        soal: 'Hasil dari (4,8 - 2,35) × 5 + 1,25 = ...',
+        pilihan: ['A. 12,5', 'B. 13,5', 'C. 14,5', 'D. 15,5'],
+        jawaban: 'B',
+        pembahasan: '4,8 - 2,35 = 2,45. Kemudian 2,45 × 5 = 12,25. Terakhir 12,25 + 1,25 = 13,5.'
+      },
+
+      // FPB & KPK (4 soal) - 1 visualisasi
+      {
+        no: 17,
+        soal: 'Adi memiliki 36 kartu Pokemon dan Bima memiliki 48 kartu. Mereka ingin menukar kartu dengan membuat kelompok-kelompok yang sama besar dan sebanyak mungkin. Berapa kartu terbanyak dalam setiap kelompok?',
+        pilihan: ['A. 6 kartu', 'B. 8 kartu', 'C. 12 kartu', 'D. 18 kartu'],
+        jawaban: 'C',
+        pembahasan: 'Cari FPB(36, 48). 36 = 2² × 3². 48 = 2⁴ × 3. FPB = 2² × 3 = 12 kartu.',
+        visual: <KoleksiKartuPokemon />
+      },
+      {
+        no: 18,
+        soal: 'KPK dari 15 dan 20 adalah...',
+        pilihan: ['A. 40', 'B. 50', 'C. 60', 'D. 75'],
+        jawaban: 'C',
+        pembahasan: '15 = 3 × 5. 20 = 2² × 5. KPK = 2² × 3 × 5 = 60.'
+      },
+      {
+        no: 19,
+        soal: 'Dua lampu berkedip bersamaan pada pukul 08.00. Lampu A berkedip setiap 12 detik dan lampu B setiap 18 detik. Pukul berapa kedua lampu akan berkedip bersamaan lagi untuk pertama kalinya?',
+        pilihan: ['A. 08.00.24', 'B. 08.00.36', 'C. 08.00.48', 'D. 08.01.00'],
+        jawaban: 'B',
+        pembahasan: 'KPK(12, 18) = 36 detik. Jadi berkedip bersamaan lagi pada pukul 08.00.36.'
+      },
+      {
+        no: 20,
+        soal: 'FPB dari 84 dan 126 adalah...',
+        pilihan: ['A. 14', 'B. 21', 'C. 28', 'D. 42'],
+        jawaban: 'D',
+        pembahasan: '84 = 2² × 3 × 7. 126 = 2 × 3² × 7. FPB = 2 × 3 × 7 = 42.'
+      },
+
+      // PANGKAT & AKAR (3 soal) - 1 visualisasi
+      {
+        no: 21,
+        soal: 'Kebun sekolah berbentuk persegi dengan sisi 16 m. Luas total kebun adalah 16² m². Di kebun tersebut ada 4 petak kecil untuk menanam tomat, masing-masing berbentuk persegi dengan sisi 4 m. Berapa luas total kebun yang tidak ditanami tomat?',
+        pilihan: ['A. 192 m²', 'B. 200 m²', 'C. 208 m²', 'D. 212 m²'],
+        jawaban: 'A',
+        pembahasan: 'Luas total = 16² = 256 m². Luas 4 petak tomat = 4 × 4² = 4 × 16 = 64 m². Sisa = 256 - 64 = 192 m².',
+        visual: <DenahKebunSekolah />
+      },
+      {
+        no: 22,
+        soal: 'Hasil dari √144 + √81 - √49 = ...',
+        pilihan: ['A. 14', 'B. 15', 'C. 16', 'D. 17'],
+        jawaban: 'A',
+        pembahasan: '√144 = 12, √81 = 9, √49 = 7. Jadi 12 + 9 - 7 = 14.'
+      },
+      {
+        no: 23,
+        soal: 'Jika 2⁴ × 2³ = 2ⁿ, maka nilai n adalah...',
+        pilihan: ['A. 5', 'B. 6', 'C. 7', 'D. 8'],
+        jawaban: 'C',
+        pembahasan: '2⁴ × 2³ = 2⁽⁴⁺³⁾ = 2⁷. Jadi n = 7.'
+      },
+
+      // OPERASI CAMPURAN + SOAL BERSAMBUNG (2 soal) - 1 visualisasi
+      {
+        no: 24,
+        soal: 'Ani pergi ke toko buku dengan uang Rp150.000. Ia membeli 3 buku tulis (@Rp8.500), 2 pensil (@Rp3.500), dan 1 penghapus (Rp4.000). Toko memberikan diskon 10% untuk total belanja di atas Rp30.000. Berapa total yang harus dibayar Ani setelah diskon?',
+        pilihan: ['A. Rp31.850', 'B. Rp32.500', 'C. Rp32.850', 'D. Rp33.000'],
+        jawaban: 'C',
+        pembahasan: 'Subtotal = (3×8.500) + (2×3.500) + 4.000 = 25.500 + 7.000 + 4.000 = 36.500. Diskon = 10% × 36.500 = 3.650. Total bayar = 36.500 - 3.650 = 32.850.',
+        visual: <StukBelanjaToko />
+      },
+      {
+        no: 25,
+        soal: 'Lanjutan soal 24: Setelah membayar Rp32.850, Ani mendapat kembalian dari uang Rp150.000. Dengan uang kembalian tersebut, Ani ingin membeli stiker lucu seharga Rp2.500 per lembar. Berapa lembar stiker maksimal yang bisa dibeli Ani?',
+        pilihan: ['A. 45 lembar', 'B. 46 lembar', 'C. 47 lembar', 'D. 48 lembar'],
+        jawaban: 'B',
+        pembahasan: 'Kembalian = 150.000 - 32.850 = 117.150. Jumlah stiker = 117.150 ÷ 2.500 = 46,86. Maksimal 46 lembar (karena tidak bisa beli 0,86 lembar).'
+      }
+    ];
+
+    const TryOutMatematika = () => {
+      const [showAnswers, setShowAnswers] = useState(false);
+      const [activeSection, setActiveSection] = useState('soal');
+      const [expandedSoal, setExpandedSoal] = useState([]);
+
+      const toggleExpand = (no) => {
+        setExpandedSoal(prev => 
+          prev.includes(no) ? prev.filter(n => n !== no) : [...prev, no]
+        );
+      };
+
+      return (
+        <div className="max-w-5xl mx-auto p-4 bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
+          
+          {/* Breadcrumb Navigation */}
+          <div className="mb-6 flex gap-2 text-sm">
+            <a href="../../index.html" className="text-purple-600 hover:text-purple-800 font-medium">Beranda</a>
+            <span className="text-gray-400">→</span>
+            <a href="../index.html" className="text-purple-600 hover:text-purple-800 font-medium">Matematika</a>
+            <span className="text-gray-400">→</span>
+            <span className="text-purple-600 hover:text-purple-800 font-medium">Kategori Khusus</span>
+            <span className="text-gray-400">→</span>
+            <span className="text-gray-600 font-medium">Operasi Bilangan - Sesi 1</span>
+          </div>
+
+          {/* Header */}
+          <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
+            <div className="text-center">
+              <div className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-4">
+                KATEGORI KHUSUS - OPERASI BILANGAN
+              </div>
+              <h1 className="text-4xl font-bold text-gray-800 mb-2">SESI 1 - MATEMATIKA KELAS VI SD</h1>
+              <p className="text-gray-600 text-lg">Fokus: Operasi Bilangan Bulat, Pecahan, Desimal & Persen</p>
+              <div className="flex justify-center gap-6 mt-4 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
+                  <span>⏱️ Waktu: 90 menit</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-pink-600 rounded-full"></div>
+                  <span>📝 Soal: 25</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-orange-600 rounded-full"></div>
+                  <span>📊 Tingkat: Awal (★★)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex gap-3 mb-6">
+            <button
+              onClick={() => setActiveSection('soal')}
+              className={`flex-1 py-4 px-6 rounded-xl font-bold text-lg transition-all transform hover:scale-105 ${
+                activeSection === 'soal'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
+              }`}
+            >
+              <BookOpen className="inline mr-2" />
+              SOAL
+            </button>
+            <button
+              onClick={() => {
+                setActiveSection('jawaban');
+                setShowAnswers(true);
+              }}
+              className={`flex-1 py-4 px-6 rounded-xl font-bold text-lg transition-all transform hover:scale-105 ${
+                activeSection === 'jawaban'
+                  ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
+              }`}
+            >
+              <CheckCircle className="inline mr-2" />
+              KUNCI JAWABAN
+            </button>
+          </div>
+
+          {/* Info Banner */}
+          <div className="bg-gradient-to-r from-purple-100 to-pink-100 border-l-4 border-purple-500 rounded-lg p-4 mb-6 shadow">
+            <div className="flex items-start gap-3">
+              <div className="text-2xl">📌</div>
+              <div>
+                <p className="font-semibold text-purple-900 mb-1">Petunjuk Pengerjaan:</p>
+                <p className="text-sm text-purple-800">
+                  Pilihlah jawaban yang paling tepat dengan memberi tanda silang (X) pada huruf A, B, C, atau D. 
+                  Perhatikan soal bersambung pada nomor 24-25. Pastikan kamu menjawab soal 24 dengan benar karena jawabannya akan digunakan untuk soal 25!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Soal Section */}
+          {activeSection === 'soal' ? (
+            <div className="space-y-4">
+              {soalData.map((item) => (
+                <div 
+                  key={item.no} 
+                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all border-2 border-gray-100 hover:border-purple-300 overflow-hidden"
+                >
+                  <div className="p-5">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-gradient-to-br from-purple-600 to-pink-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0 shadow-lg">
+                        {item.no}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-gray-800 leading-relaxed mb-4">{item.soal}</p>
+                        
+                        {item.visual && (
+                          <div className="bg-gradient-to-br from-gray-50 to-purple-50 border-2 border-purple-200 rounded-xl p-4 mb-4">
+                            {item.visual}
+                          </div>
+                        )}
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {item.pilihan.map((p, idx) => (
+                            <div 
+                              key={idx} 
+                              className="text-gray-700 bg-gray-50 hover:bg-purple-50 p-3 rounded-lg border border-gray-200 hover:border-purple-300 transition-all cursor-pointer"
+                            >
+                              {p}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {soalData.map((item) => (
+                <div 
+                  key={item.no} 
+                  className="bg-white rounded-xl shadow-md border-2 border-green-200 overflow-hidden"
+                >
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 border-b-2 border-green-200">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow">
+                          {item.no}
+                        </div>
+                        <div className="bg-green-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow">
+                          Jawaban: {item.jawaban}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => toggleExpand(item.no)}
+                        className="text-green-600 hover:text-green-700 transition-colors"
+                      >
+                        {expandedSoal.includes(item.no) ? <ChevronUp /> : <ChevronDown />}
+                      </button>
+                    </div>
+                  </div>
+                  
+                  {expandedSoal.includes(item.no) && (
+                    <div className="p-5">
+                      <div className="bg-gray-50 rounded-lg p-4 mb-3 border border-gray-200">
+                        <p className="text-sm text-gray-600 mb-2">📝 Soal:</p>
+                        <p className="text-gray-800 mb-3">{item.soal}</p>
+                        
+                        {item.visual && (
+                          <div className="bg-white border border-gray-300 rounded-lg p-3 mt-3">
+                            {item.visual}
+                          </div>
+                        )}
+                      </div>
+                      <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+                        <p className="font-bold text-green-800 mb-2">💡 PEMBAHASAN:</p>
+                        <p className="text-gray-700 leading-relaxed">{item.pembahasan}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Stats Footer */}
+          <div className="mt-8 bg-white rounded-2xl shadow-xl p-6">
+            <h3 className="font-bold text-gray-800 mb-4 text-lg">📊 Distribusi Topik (25 Soal):</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+              {[
+                { topic: 'Bilangan Bulat', count: 5, color: 'bg-blue-100 text-blue-700' },
+                { topic: 'Pecahan', count: 6, color: 'bg-green-100 text-green-700' },
+                { topic: 'Desimal & Persen', count: 5, color: 'bg-purple-100 text-purple-700' },
+                { topic: 'FPB & KPK', count: 4, color: 'bg-pink-100 text-pink-700' },
+                { topic: 'Pangkat & Akar', count: 3, color: 'bg-orange-100 text-orange-700' },
+                { topic: 'Soal Bersambung', count: 2, color: 'bg-red-100 text-red-700' }
+              ].map((item, idx) => (
+                <div key={idx} className={`${item.color} rounded-lg p-3 text-center shadow-sm`}>
+                  <div className="font-bold text-2xl">{item.count}</div>
+                  <div className="text-xs font-semibold mt-1">{item.topic}</div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
+              <p className="text-sm text-gray-700">
+                <span className="font-bold text-purple-700">🎯 Fokus Pembelajaran:</span> Sesi ini dirancang khusus untuk memperdalam pemahaman tentang <strong>Operasi Bilangan</strong>, 
+                mencakup bilangan bulat, pecahan, desimal, persen, FPB, KPK, serta operasi pangkat dan akar dengan konteks kehidupan sehari-hari anak SD.
+              </p>
+            </div>
+
+            <div className="mt-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-4 border border-yellow-200">
+              <p className="text-sm text-gray-700">
+                <span className="font-bold text-orange-700">🎨 Visualisasi Terintegrasi:</span> Dokumen ini dilengkapi dengan <strong>8 visualisasi interaktif</strong> 
+                yang relevan dengan kehidupan anak SD: uang jajan, pizza, koleksi kartu, nilai ulangan, timbangan, waktu belajar, kebun sekolah, dan struk belanja.
+              </p>
+            </div>
+
+            <div className="mt-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200">
+              <p className="text-sm text-gray-700">
+                <span className="font-bold text-blue-700">🔗 Soal Bersambung:</span> Perhatikan soal nomor <strong>24-25</strong> yang merupakan soal bersambung 
+                dengan konteks "Ani Belanja di Toko Buku". Jawaban soal 24 diperlukan untuk menyelesaikan soal 25.
+              </p>
+            </div>
+
+            <div className="mt-6 flex gap-3 justify-center">
+              <button onClick={() => window.print()} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-colors shadow-lg flex items-center gap-2">
+                <Printer />
+                Cetak Soal
+              </button>
+            </div>
+          </div>
+
+          {/* Navigation ke Sesi Lain */}
+          <div className="mt-6 bg-white rounded-2xl shadow-xl p-6">
+            <h3 className="font-bold text-gray-800 mb-4 text-lg">🚀 Sesi Lainnya - Operasi Bilangan:</h3>
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              <div className="bg-purple-100 border-2 border-purple-400 rounded-lg p-4 text-center min-w-32">
+                <div className="font-bold text-purple-700 text-xl mb-1">Sesi 1</div>
+                <div className="text-xs text-purple-600">✓ Aktif</div>
+              </div>
+              <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-4 text-center min-w-32 opacity-60">
+                <div className="font-bold text-gray-700 text-xl mb-1">Sesi 2</div>
+                <div className="text-xs text-gray-600">Segera</div>
+              </div>
+              <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-4 text-center min-w-32 opacity-60">
+                <div className="font-bold text-gray-700 text-xl mb-1">Sesi 3</div>
+                <div className="text-xs text-gray-600">Segera</div>
+              </div>
+              <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-4 text-center min-w-32 opacity-60">
+                <div className="font-bold text-gray-700 text-xl mb-1">Sesi OSN</div>
+                <div className="text-xs text-gray-600">Segera</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Credit */}
+          <div className="text-center mt-6 text-sm text-gray-600">
+            <p>✨ Try Out Matematika Kategori Khusus - Operasi Bilangan Sesi 1</p>
+            <p className="text-xs mt-1">Tingkat Awal (★★) dengan 8 visualisasi interaktif & soal bersambung</p>
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<TryOutMatematika />, document.getElementById('root'));
+  </script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</body>
+</html>
