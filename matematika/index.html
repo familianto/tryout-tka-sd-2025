@@ -54,20 +54,20 @@
         <!-- Stats Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
           <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl p-4 border border-blue-200">
-            <div class="text-3xl font-bold text-blue-700">5</div>
-            <div class="text-xs text-blue-600 font-semibold">Sesi Reguler</div>
+            <div class="text-3xl font-bold text-blue-700">3/5</div>
+            <div class="text-xs text-blue-600 font-semibold">Sesi Umum</div>
           </div>
           <div class="bg-gradient-to-br from-purple-100 to-purple-50 rounded-xl p-4 border border-purple-200">
-            <div class="text-3xl font-bold text-purple-700">125</div>
+            <div class="text-3xl font-bold text-purple-700">100+</div>
             <div class="text-xs text-purple-600 font-semibold">Total Soal</div>
           </div>
           <div class="bg-gradient-to-br from-pink-100 to-pink-50 rounded-xl p-4 border border-pink-200">
-            <div class="text-3xl font-bold text-pink-700">1</div>
-            <div class="text-xs text-pink-600 font-semibold">Kategori Khusus</div>
+            <div class="text-3xl font-bold text-pink-700">1/4</div>
+            <div class="text-xs text-pink-600 font-semibold">Operasi Bilangan</div>
           </div>
-          <div class="bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl p-4 border border-orange-200">
-            <div class="text-3xl font-bold text-orange-700">+</div>
-            <div class="text-xs text-orange-600 font-semibold">Ringkasan Rumus</div>
+          <div class="bg-gradient-to-br from-green-100 to-green-50 rounded-xl p-4 border border-green-200">
+            <div class="text-3xl font-bold text-green-700">4</div>
+            <div class="text-xs text-green-600 font-semibold">Sesi Tersedia</div>
           </div>
         </div>
       </div>
@@ -77,23 +77,36 @@
     <div class="mb-8">
       <div class="flex items-center gap-3 mb-4">
         <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg px-4 py-2 font-bold shadow-lg">
-          📚 TRY OUT REGULER
+          📚 KATEGORI UMUM
         </div>
         <div class="flex-1 h-1 bg-gradient-to-r from-purple-600 to-transparent rounded"></div>
       </div>
+
+      <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 border-2 border-blue-200 mb-4">
+        <p class="text-gray-700 text-sm leading-relaxed">
+          <span class="font-bold text-blue-700">📖 Info:</span> Kategori Umum mencakup 
+          <strong>materi fundamental Matematika SD Kelas VI</strong> yang disusun secara sistematis 
+          dalam 5 sesi. Setiap sesi berisi 25 soal pilihan ganda dengan pembahasan lengkap 
+          dan kunci jawaban.
+        </p>
+      </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Sesi 1 -->
-        <div class="bg-white rounded-2xl shadow-lg hover-lift border-2 border-blue-100 overflow-hidden">
+        <!-- Sesi 1 - Available -->
+        <div class="bg-white rounded-2xl shadow-lg hover-lift border-2 border-blue-300 overflow-hidden">
           <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-5">
             <div class="flex justify-between items-start mb-2">
               <h3 class="text-2xl font-bold">SESI 1</h3>
-              <span class="bg-white text-blue-600 px-3 py-1 rounded-full text-xs font-bold">25 Soal</span>
+              <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">✓ Aktif</span>
             </div>
             <p class="text-blue-100 text-sm">Pengenalan Dasar</p>
           </div>
           <div class="p-5">
             <div class="space-y-2 mb-4 text-sm">
+              <div class="flex items-center gap-2 text-gray-600">
+                <span class="text-blue-500">✓</span>
+                <span>25 soal pilihan ganda</span>
+              </div>
               <div class="flex items-center gap-2 text-gray-600">
                 <span class="text-blue-500">✓</span>
                 <span>Operasi Bilangan Bulat</span>
@@ -108,70 +121,78 @@
               </div>
             </div>
             <div class="flex gap-2">
-              <a href="sesi-1/index.html" class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold text-center hover:from-blue-700 hover:to-blue-800 transition-all shadow-md">
-                Mulai Latihan
+              <a href="umum/sesi-1.html" class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold text-center hover:from-blue-700 hover:to-blue-800 transition-all shadow-md">
+                Mulai Latihan →
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Sesi 2 -->
-        <div class="bg-white rounded-2xl shadow-lg border-2 border-gray-200 overflow-hidden opacity-60">
-          <div class="bg-gradient-to-r from-gray-400 to-gray-500 text-white p-5">
+        <!-- Sesi 2 - Available -->
+        <div class="bg-white rounded-2xl shadow-lg hover-lift border-2 border-blue-300 overflow-hidden">
+          <div class="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white p-5">
             <div class="flex justify-between items-start mb-2">
               <h3 class="text-2xl font-bold">SESI 2</h3>
-              <span class="bg-white text-gray-600 px-3 py-1 rounded-full text-xs font-bold">25 Soal</span>
+              <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">✓ Aktif</span>
             </div>
-            <p class="text-gray-100 text-sm">Pengembangan</p>
+            <p class="text-cyan-100 text-sm">Pengembangan</p>
           </div>
           <div class="p-5">
             <div class="space-y-2 mb-4 text-sm">
-              <div class="flex items-center gap-2 text-gray-500">
-                <span>○</span>
+              <div class="flex items-center gap-2 text-gray-600">
+                <span class="text-cyan-500">✓</span>
+                <span>25 soal pilihan ganda</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-600">
+                <span class="text-cyan-500">✓</span>
                 <span>Geometri & Pengukuran</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-500">
-                <span>○</span>
+              <div class="flex items-center gap-2 text-gray-600">
+                <span class="text-cyan-500">✓</span>
                 <span>Statistika Dasar</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-500">
-                <span>○</span>
+              <div class="flex items-center gap-2 text-gray-600">
+                <span class="text-cyan-500">✓</span>
                 <span>Soal Cerita</span>
               </div>
             </div>
-            <div class="bg-gray-100 text-gray-500 py-3 rounded-lg font-semibold text-center">
-              🔒 Segera Hadir
-            </div>
+            <a href="umum/sesi-2.html" class="block bg-gradient-to-r from-cyan-600 to-cyan-700 text-white py-3 rounded-lg font-semibold text-center hover:from-cyan-700 hover:to-cyan-800 transition-all shadow-md">
+              Mulai Latihan →
+            </a>
           </div>
         </div>
 
-        <!-- Sesi 3 -->
-        <div class="bg-white rounded-2xl shadow-lg border-2 border-gray-200 overflow-hidden opacity-60">
-          <div class="bg-gradient-to-r from-gray-400 to-gray-500 text-white p-5">
+        <!-- Sesi 3 - Available -->
+        <div class="bg-white rounded-2xl shadow-lg hover-lift border-2 border-blue-300 overflow-hidden">
+          <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white p-5">
             <div class="flex justify-between items-start mb-2">
               <h3 class="text-2xl font-bold">SESI 3</h3>
-              <span class="bg-white text-gray-600 px-3 py-1 rounded-full text-xs font-bold">25 Soal</span>
+              <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">✓ Aktif</span>
             </div>
-            <p class="text-gray-100 text-sm">Pendalaman</p>
+            <p class="text-indigo-100 text-sm">Pendalaman</p>
           </div>
           <div class="p-5">
             <div class="space-y-2 mb-4 text-sm">
-              <div class="flex items-center gap-2 text-gray-500">
-                <span>○</span>
+              <div class="flex items-center gap-2 text-gray-600">
+                <span class="text-indigo-500">✓</span>
+                <span>25 soal pilihan ganda</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-600">
+                <span class="text-indigo-500">✓</span>
                 <span>Perbandingan & Skala</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-500">
-                <span>○</span>
+              <div class="flex items-center gap-2 text-gray-600">
+                <span class="text-indigo-500">✓</span>
                 <span>Debit & Kecepatan</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-500">
-                <span>○</span>
+              <div class="flex items-center gap-2 text-gray-600">
+                <span class="text-indigo-500">✓</span>
                 <span>Soal Kombinasi</span>
               </div>
             </div>
-            <div class="bg-gray-100 text-gray-500 py-3 rounded-lg font-semibold text-center">
-              🔒 Segera Hadir
-            </div>
+            <a href="umum/sesi-3.html" class="block bg-gradient-to-r from-indigo-600 to-indigo-700 text-white py-3 rounded-lg font-semibold text-center hover:from-indigo-700 hover:to-indigo-800 transition-all shadow-md">
+              Mulai Latihan →
+            </a>
           </div>
         </div>
 
@@ -186,6 +207,10 @@
           </div>
           <div class="p-5">
             <div class="space-y-2 mb-4 text-sm">
+              <div class="flex items-center gap-2 text-gray-500">
+                <span>○</span>
+                <span>25 soal pilihan ganda</span>
+              </div>
               <div class="flex items-center gap-2 text-gray-500">
                 <span>○</span>
                 <span>Soal Aplikatif</span>
@@ -218,6 +243,10 @@
             <div class="space-y-2 mb-4 text-sm">
               <div class="flex items-center gap-2 text-gray-500">
                 <span>○</span>
+                <span>25 soal pilihan ganda</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-500">
+                <span>○</span>
                 <span>Soal Campuran</span>
               </div>
               <div class="flex items-center gap-2 text-gray-500">
@@ -236,32 +265,32 @@
         </div>
 
         <!-- Ringkasan Rumus -->
-        <div class="bg-white rounded-2xl shadow-lg border-2 border-amber-100 overflow-hidden hover-lift">
-          <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white p-5">
+        <div class="bg-white rounded-2xl shadow-lg border-2 border-gray-200 overflow-hidden opacity-60">
+          <div class="bg-gradient-to-r from-gray-400 to-gray-500 text-white p-5">
             <div class="flex justify-between items-start mb-2">
               <h3 class="text-xl font-bold">📋 RUMUS</h3>
-              <span class="bg-white text-amber-600 px-3 py-1 rounded-full text-xs font-bold">Bonus</span>
+              <span class="bg-white text-gray-600 px-3 py-1 rounded-full text-xs font-bold">Bonus</span>
             </div>
-            <p class="text-amber-100 text-sm">Rangkuman Lengkap</p>
+            <p class="text-gray-100 text-sm">Rangkuman Lengkap</p>
           </div>
           <div class="p-5">
             <div class="space-y-2 mb-4 text-sm">
-              <div class="flex items-center gap-2 text-gray-600">
-                <span class="text-amber-500">✓</span>
+              <div class="flex items-center gap-2 text-gray-500">
+                <span>○</span>
                 <span>Rumus Penting</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-600">
-                <span class="text-amber-500">✓</span>
+              <div class="flex items-center gap-2 text-gray-500">
+                <span>○</span>
                 <span>Contoh Soal</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-600">
-                <span class="text-amber-500">✓</span>
+              <div class="flex items-center gap-2 text-gray-500">
+                <span>○</span>
                 <span>Tips & Trik</span>
               </div>
             </div>
-            <a href="ringkasan-rumus/index.html" class="block bg-gradient-to-r from-amber-600 to-orange-600 text-white py-3 rounded-lg font-semibold text-center hover:from-amber-700 hover:to-orange-700 transition-all shadow-md">
-              Lihat Rumus
-            </a>
+            <div class="bg-gray-100 text-gray-500 py-3 rounded-lg font-semibold text-center">
+              🔒 Segera Hadir
+            </div>
           </div>
         </div>
       </div>
@@ -346,7 +375,7 @@
                   <span class="text-xs">Waktu: 90 menit</span>
                 </div>
               </div>
-              <a href="kategori-khusus/operasi-bilangan-sesi-1.html" class="block bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 rounded-lg font-semibold text-center hover:from-purple-700 hover:to-pink-700 transition-all shadow-md text-sm">
+              <a href="khusus/operasi-bilangan-sesi-1.html" class="block bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 rounded-lg font-semibold text-center hover:from-purple-700 hover:to-pink-700 transition-all shadow-md text-sm">
                 Mulai Latihan →
               </a>
             </div>
@@ -495,19 +524,19 @@
       <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
         <div class="flex gap-3">
           <span class="text-blue-600 font-bold">1.</span>
-          <span>Mulai dari <strong>Try Out Reguler</strong> untuk membangun fondasi yang kuat</span>
+          <span>Mulai dari <strong>Kategori Umum Sesi 1-3</strong> untuk membangun fondasi yang kuat</span>
         </div>
         <div class="flex gap-3">
           <span class="text-blue-600 font-bold">2.</span>
-          <span>Pelajari <strong>Ringkasan Rumus</strong> sebelum mengerjakan soal</span>
+          <span>Kerjakan soal secara <strong>berurutan</strong> sesuai nomor sesi</span>
         </div>
         <div class="flex gap-3">
           <span class="text-purple-600 font-bold">3.</span>
-          <span>Dalami topik spesifik melalui <strong>Kategori Khusus</strong> sesuai kebutuhan</span>
+          <span>Dalami topik spesifik melalui <strong>Kategori Khusus</strong> untuk penguatan</span>
         </div>
         <div class="flex gap-3">
           <span class="text-purple-600 font-bold">4.</span>
-          <span>Kerjakan <strong>soal bertingkat</strong> dalam kategori khusus secara berurutan</span>
+          <span>Manfaatkan <strong>visualisasi interaktif</strong> di Kategori Khusus untuk pemahaman lebih baik</span>
         </div>
       </div>
     </div>
