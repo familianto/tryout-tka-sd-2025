@@ -199,26 +199,27 @@
       <svg viewBox="0 0 450 400" className="w-full max-w-lg mx-auto">
         <text x="225" y="25" textAnchor="middle" className="text-sm font-bold fill-gray-700">Waktu Belajar Sinta dalam Sehari (12 jam)</text>
         
-        {/* Pie chart - properly rendered */}
+        {/* Pie chart - properly calculated */}
         <g transform="translate(225, 180)">
-          {/* Matematika 25% (0-90 degrees) */}
+          {/* Matematika 25% (0° to 90°) */}
           <path d="M 0,-100 A 100,100 0 0,1 100,0 L 0,0 Z" fill="#3b82f6" stroke="white" strokeWidth="2"/>
-          <text x="50" y="-40" textAnchor="middle" className="text-xs font-bold fill-white">Matematika</text>
-          <text x="50" y="-28" textAnchor="middle" className="text-xs fill-white">25%</text>
+          <text x="45" y="-45" textAnchor="middle" className="text-xs font-bold fill-white">Matematika</text>
+          <text x="45" y="-33" textAnchor="middle" className="text-xs fill-white">25%</text>
           
-          {/* IPA 20% (90-162 degrees) */}
-          <path d="M 100,0 A 100,100 0 0,1 47,88 L 0,0 Z" fill="#10b981" stroke="white" strokeWidth="2"/>
-          <text x="70" y="35" textAnchor="middle" className="text-xs font-bold fill-white">IPA</text>
-          <text x="70" y="47" textAnchor="middle" className="text-xs fill-white">20%</text>
+          {/* IPA 20% (90° to 162°) */}
+          <path d="M 100,0 A 100,100 0 0,1 30.9,95.1 L 0,0 Z" fill="#10b981" stroke="white" strokeWidth="2"/>
+          <text x="65" y="40" textAnchor="middle" className="text-xs font-bold fill-white">IPA</text>
+          <text x="65" y="52" textAnchor="middle" className="text-xs fill-white">20%</text>
           
-          {/* B.Indonesia 15% (162-216 degrees) */}
-          <path d="M 47,88 A 100,100 0 0,1 -59,81 L 0,0 Z" fill="#f59e0b" stroke="white" strokeWidth="2"/>
-          <text x="-10" y="75" textAnchor="middle" className="text-xs font-bold fill-white">BI 15%</text>
+          {/* B.Indonesia 15% (162° to 216°) */}
+          <path d="M 30.9,95.1 A 100,100 0 0,1 -58.8,80.9 L 0,0 Z" fill="#f59e0b" stroke="white" strokeWidth="2"/>
+          <text x="-20" y="75" textAnchor="middle" className="text-xs font-bold fill-white">BI</text>
+          <text x="-20" y="87" textAnchor="middle" className="text-xs fill-white">15%</text>
           
-          {/* Istirahat 40% (216-360 degrees) */}
-          <path d="M -59,81 A 100,100 0 1,1 0,-100 L 0,0 Z" fill="#ef4444" stroke="white" strokeWidth="2"/>
-          <text x="-50" y="-10" textAnchor="middle" className="text-xs font-bold fill-white">Istirahat</text>
-          <text x="-50" y="5" textAnchor="middle" className="text-xs fill-white">40%</text>
+          {/* Istirahat 40% (216° to 360°) - large arc */}
+          <path d="M -58.8,80.9 A 100,100 0 1,1 0,-100 L 0,0 Z" fill="#ef4444" stroke="white" strokeWidth="2"/>
+          <text x="-45" y="0" textAnchor="middle" className="text-xs font-bold fill-white">Istirahat</text>
+          <text x="-45" y="12" textAnchor="middle" className="text-xs fill-white">40%</text>
         </g>
         
         {/* Legend - centered */}
